@@ -1,0 +1,3 @@
+{{ if .Site.Params.tracking.googleAnalytics }}
+<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.tracking.googleAnalytics }}"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '{{ .Site.Params.tracking.googleAnalytics }}');</script>
+{{ else }}{{ end }}

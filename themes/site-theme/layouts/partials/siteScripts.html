@@ -1,0 +1,23 @@
+{{ $script := .Site.Data.webpack_assets.app }}
+{{ with $script.js }}
+  <script defer src="{{ absURL (printf "%s%s" "/dist/" .) }}"></script>
+{{ end }}
+
+{{ if eq .Site.Params.extraTools.floatingHeader true }}
+<script>
+let scrollpos = window.scrollY
+  const header = document.querySelector(".header-container")
+  const headerHeightFix = document.querySelector("#headerFloatingHeightFix")
+  const headerHeight = header.offsetHeight
+  const addHeaderFloat = () => header.classList.add("fixed", "z-50", "top-0", "w-full", "bg-white")
+  const addHeaderHeightFix = () => headerHeightFix.classList.add("h-24")
+  const removeHeaderFloat = () => header.classList.remove("fixed")
+  const removeHeaderHeightFix = () => headerHeightFix.classList.remove("h-24")
+  window.addEventListener('scroll', function() { 
+    scrollpos = window.scrollY;
+    if (scrollpos >= headerHeight + 200) { addHeaderFloat(), addHeaderHeightFix() }
+    else { removeHeaderFloat(), removeHeaderHeightFix() }
+})
+</script>
+{{ else }}
+{{ end }}

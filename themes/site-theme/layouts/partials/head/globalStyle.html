@@ -1,0 +1,1 @@
+{{ $stylesheet := .Site.Data.webpack_assets.app }}{{ with $stylesheet.css }}<link href="{{ absURL (printf "%s%s" "/dist/" .) }}" rel="stylesheet">{{ end }}

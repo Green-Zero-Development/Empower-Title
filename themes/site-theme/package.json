@@ -1,0 +1,20 @@
+{
+  "name": "gohugo-default-theme",
+  "version": "1.0.0",
+  "description": "Base Theme to start Hugo Sites",
+  "main": "index.js",  
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "hugo",
+    "gohugo"
+  ],
+  "author": "brendonfolsom",
+  "license": "MIT",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": ""
+}

@@ -1,0 +1,188 @@
+{{ define "main" }}
+
+<style>
+/* slider CSS */
+.slide-1 {
+    background-image: url("https://res.cloudinary.com/animated-eagle/image/upload/v1549394021/greenZero/case-study-insurance-industry.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.slide-2 {
+    background-image: url("https://res.cloudinary.com/animated-eagle/image/upload/v1549393875/greenZero/case-study-retail-industry.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.slide-3 {
+    background-image: url("https://res.cloudinary.com/animated-eagle/image/upload/v1549393634/greenZero/case-study-security-industry-website.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.tns-nav {
+    display: none;
+}
+
+.tns-outer {
+    width: 100%;
+}
+
+.tns-outer button {
+    display: none;
+}
+/* END */
+/* Modal CSS */
+.modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__close {
+  background: transparent;
+  border: 0;
+}
+
+@keyframes mmfadeIn {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
+
+@keyframes mmfadeOut {
+    from { opacity: 1; }
+      to { opacity: 0; }
+}
+
+@keyframes mmslideIn {
+  from { transform: translateY(15%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes mmslideOut {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10%); }
+}
+
+.micromodal-slide {
+  display: none;
+}
+
+.micromodal-slide.is-open {
+  display: block;
+}
+
+.micromodal-slide[aria-hidden="false"] .modal__overlay {
+  animation: mmfadeIn .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden="false"] .modal__container {
+  animation: mmslideIn .3s cubic-bezier(0, 0, .2, 1);
+}
+
+.micromodal-slide[aria-hidden="true"] .modal__overlay {
+  animation: mmfadeOut .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.micromodal-slide[aria-hidden="true"] .modal__container {
+  animation: mmslideOut .3s cubic-bezier(0, 0, .2, 1);
+}
+
+.micromodal-slide .modal__container,
+.micromodal-slide .modal__overlay {
+  will-change: transform;
+}
+/* END */
+</style>
+<section id="homepage-slider" class="flex flex-wrap relative mx-auto homepage-slider">
+    <div id="homepage-slider-images" class="flex flex-wrap mx-auto">
+    <div class="flex flex-wrap py-20 lg:pt-40 lg:pb-72 slide-1">
+        <div class="flex flex-wrap w-2/3 mx-auto py-2">
+            <h1 class="w-full font-black text-center lg:text-left text-2xl md:text-4xl text-white">Example Title for Slider</h1>
+            <h2 class="w-full font-black text-center lg:text-left text-2xl md:text-4xl text-white">Slider Subtitle</h2>
+        </div>
+    </div>
+    <div class="flex flex-wrap py-24 lg:pt-24 lg:pb-32 slide-2">
+        <div class="flex flex-wrap w-2/3 mx-auto py-2">
+            <h1 class="w-full font-black text-center lg:text-left text-2xl md:text-4xl text-white">Example Title for Slider</h1>
+            <h2 class="w-full font-black text-center lg:text-left text-2xl md:text-4xl text-white">Slider Subtitle</h2>
+        </div>
+        <div class="w-full h-2"></div>
+    </div>
+    <div class="flex flex-wrap py-24 lg:pt-24 lg:pb-32 slide-3">
+        <div class="flex flex-wrap w-2/3 mx-auto py-2">
+            <h1 class="w-full font-black text-center lg:text-left text-2xl md:text-4xl text-white">Title for Slider List</h1>
+            <ul class="hidden lg:block w-full font-black text-3xl text-white pl-12 list-disc">
+                <li>List Item One</li>
+                <li>List Item Two</li>
+                <li>List Item Three</li>
+                <li>List Item Four</li>
+                <li>List Item Five</li>
+            </ul>
+        </div>
+        <div class="w-full lg:h-12"></div>
+        <div class="w-full lg:h-2"></div>
+    </div>
+    </div>
+    <ul class="absolute flex flex-wrap w-full pt-64 controls" id="slider-controls">
+        <div class="relative w-1/2 h-full text-left z-50 outline-none">
+            <i class="bg-black text-white text-2xl lg:text-5xl px-2 py-3 rounded opacity-50 hover:opacity-100 hover:cursor-pointer focus:outline-none fas fa-angle-left"></i>
+        </div>
+        <div class="relative w-1/2 h-full text-right z-50 outline-none">
+            <i class="bg-black text-white text-2xl lg:text-5xl px-2 py-3 rounded opacity-50 hover:opacity-100 hover:cursor-pointer focus:outline-none fas fa-angle-right"></i>
+        </div>
+    </ul>
+</section>
+
+<section id="testimonial-slider" class="flex flex-wrap bg-gray-200 mx-auto testimonial-slider">
+    <div id="testimonial-slider-images" class="flex flex-wrap">
+    <div class="flex flex-wrap py-12">
+        <div class="flex flex-wrap w-full lg:w-2/3 bg-white mx-auto p-8">
+            <blockquote class="w-full font-Quat font-black text-center lg:text-left text-xl text-black leading-tight">"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."</blockquote>
+            <h6 class="w-full font-Monts font-black text-center lg:text-left text-2xl text-color-d12912">This Person <span class="font-thin text-lg">This Title | This Company</span></h6>
+        </div>
+    </div>
+    <div class="flex flex-wrap py-12">
+        <div class="flex flex-wrap w-full lg:w-2/3 bg-white mx-auto p-8">
+            <blockquote class="w-full font-Quat font-black text-center lg:text-left text-xl text-black leading-tight">"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."</blockquote>
+            <h6 class="w-full font-Monts font-black text-center lg:text-left text-2xl text-color-d12912">This Person <span class="font-thin text-lg">This Title | This Company</span></h6>
+        </div>
+    </div>
+    <div class="flex flex-wrap py-12">
+        <div class="flex flex-wrap w-full lg:w-2/3 bg-white mx-auto p-8">
+            <blockquote class="w-full font-Quat font-black text-center lg:text-left text-xl text-black leading-tight">"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."</blockquote>
+            <h6 class="w-full font-Monts font-black text-center lg:text-left text-2xl text-color-d12912">This Person <span class="font-thin text-lg">This Title | This Company</span></h6>
+        </div>
+    </div>
+    </div>
+    <ul class="absolute flex flex-wrap w-full pt-32 controls" id="testimonial-slider-controls">
+        <div class="relative w-1/2 h-full text-left z-50 outline-none">
+            <i class="bg-black text-white text-2xl lg:text-5xl px-2 py-3 rounded opacity-50 hover:opacity-100 hover:cursor-pointer focus:outline-none fas fa-angle-left"></i>
+        </div>
+        <div class="relative w-1/2 h-full text-right z-50 outline-none">
+            <i class="bg-black text-white text-2xl lg:text-5xl px-2 py-3 rounded opacity-50 hover:opacity-100 hover:cursor-pointer focus:outline-none fas fa-angle-right"></i>
+        </div>
+    </ul>
+</section>
+
+<a data-micromodal-trigger="testModal" class="flex w-1/4 lg:w-1/4 bg-black hover:bg-gray-800 hover:cursor-pointer mt-5 mx-auto py-3 no-underline rounded">
+    <p class="w-full text-lg text-white font-black text-center leading-tight">Read bio</p>
+</a>
+    <div class="micromodal-slide" id="testModal" aria-hidden="true">
+        <div class="flex flex-wrap z-50 modal__overlay" tabindex="-1" data-micromodal-close>
+            <div class="w-5/6 lg:w-1/2 bg-white px-5 py-6 overflow-y-auto rounded modal__container">
+                <h6 class="text-2xl text-black font-bold">Title of Modal</h6>
+                <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+                <p class="text-base font-light text-black leading-tight pb-8">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                <a data-micromodal-close aria-label="Close this dialog window" class="w-auto bg-black hover:bg-gray-800 hover:cursor-pointer text-white no-underline py-2 px-4 rounded">Close</a>
+            </div>
+        </div>
+    </div>
+
+<div class="py-80"></div>
+<div class="text-5xl text-center fadeOnScroll">Fade on Scroll</div>
+<div class="py-80"></div>
+{{ end }}

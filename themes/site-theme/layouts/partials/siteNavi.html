@@ -1,0 +1,65 @@
+<nav id="navigation-wrapper" class="w-1/2 md:w-2/3 lg:w-2/3 mr-auto pl-5 text-left">
+
+<div class="bg-color-1c2541 text-black font-open uppercase desktop-menu">
+  {{ $currentNode := . }}
+  {{ range .Site.Menus.desktop }}
+  {{ if .HasChildren }}
+  {{ $dropdownName := .Name }}
+  {{ partial "utilities/dropdownCSS.html" (dict "context" . "Name" $dropdownName) }}
+  <div id="{{ .Name | urlize }}-dropdown" class="relative bg-color-1c2541 inline-flex select-none dropdown">
+  <a href="{{ if .Post }}{{.URL}}{{ else }}#{{ end }}" class="pr-8 desktop-menu-item" role="button">
+    {{ .Pre }}
+      <span>{{ .Name }}</span><i class="text-2xs pl-1 fas fa-angle-down"></i>
+  </a>
+  <ul class="z-50 pt-1 {{ .Name | urlize }}-dropdown-selection" role="menu">
+    {{ range .Children }}
+        {{ if .HasChildren }}
+        {{ $dropdownName := .Name }}
+        {{ partial "utilities/dropdownCSS.html" (dict "context" . "Name" $dropdownName) }}
+      <div id="{{ .Name | urlize }}-dropdown" class="w-48 relative border border-white bg-color-1c2541 p-2 select-none text-black text-xs text-left hover:cursor-pointer dropdown" onclick="window.location = {{ .URL }};">{{ .Name }}<i class="text-2xs pt-.5 pr-3 absolute right-0 fas fa-angle-right"></i>
+      <ul class="w-56 bg-color-1c2541 absolute top-0 ml-48 {{ .Name | urlize }}-dropdown-selection" role="menu">
+        {{ range .Children }}
+        <div class="flex flex-wrap select-none border border-white text-black p-2">
+            <a href="{{.URL}}" class="text-2xs menu-item">{{ .Name }}</a>
+        </div>
+        {{ end }}
+        {{ $dropdownName := .Name }}
+        {{ if .Post }}
+    {{ partial "utilities/dropdownHoverScript.html" (dict "context" . "Name" $dropdownName) }}
+        {{ else }}
+        {{ partial "utilities/dropdownClickScript.html" (dict "context" . "Name" $dropdownName) }}
+        {{ end }}
+    </ul>
+      </div>
+    {{ $dropdownName := .Name }}
+    {{ if .Post }}
+    {{ partial "utilities/dropdownHoverScript.html" (dict "context" . "Name" $dropdownName) }}
+        {{ else }}
+        {{ partial "utilities/dropdownClickScript.html" (dict "context" . "Name" $dropdownName) }}
+        {{ end }}
+      {{ else }}
+        <div class="w-40 border border-white bg-color-1c2541 p-2 leading-tight select-none text-black text-xs text-left">
+            <a href="{{.URL}}" class="menu-item">{{ .Name }}</a>
+        </div>
+        {{ end }}
+        {{ end }}
+    </ul>
+  </div>
+  {{ $dropdownName := .Name }}
+  {{ if .Post }}
+    {{ partial "utilities/dropdownHoverScript.html" (dict "context" . "Name" $dropdownName) }}
+        {{ else }}
+        {{ partial "utilities/dropdownClickScript.html" (dict "context" . "Name" $dropdownName) }}
+        {{ end }}
+  {{ else }}
+  <a class="{{if or ($currentNode.IsMenuCurrent "main" .) ($currentNode.HasMenuCurrent "main" .) }} active{{end}}{{ if .Pre }}scroll{{ else }}{{ end }} hover:bg-color-1B5785 hover:text-white text-xs xl:text-sm py-4 px-3 mr-2 select-none desktop-menu-item" href="{{.URL}}">{{ .Name }}</a>
+  {{ end }}{{ end }}
+</div>
+
+<a id="mobile-menu" class="scroll text-right" href="#headerFloatingHeightFix">
+  <div id="mobile-menu-button" class="mobile-menu-button">
+    <i class="text-3xl md:text-5xl pr-5 md:pr-8 fas fa-bars"></i>
+  </div>
+</a>
+
+</nav>

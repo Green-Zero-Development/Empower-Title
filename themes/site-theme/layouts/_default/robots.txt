@@ -1,0 +1,10 @@
+User-agent: *
+{{ if eq .Site.Params.publishingSettings.siteinProduction true }}
+{{ else }}
+Disallow: /
+{{ end }}
+{{ range where .Data.Pages "Params.robotsdisallow" true }}
+Disallow: {{ .RelPermalink }}
+{{ end }}
+
+Sitemap: {{ "sitemapindex.xml" | absLangURL }}

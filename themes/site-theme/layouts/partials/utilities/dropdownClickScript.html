@@ -1,0 +1,14 @@
+<script>
+    var activeDropdown = {};
+    document.querySelector('#{{ .Name | urlize }}-dropdown').addEventListener('click',showDropdown);                                                         
+    function showDropdown(event){
+
+        for (var i = 0;i<this.children.length;i++){
+            if (this.children[i].classList.contains('{{ .Name | urlize }}-dropdown-selection')){
+                activeDropdown.id = this.id;
+                activeDropdown.element = this.children[i];
+                this.children[i].classList.toggle('active');
+            }
+        }
+    }
+</script>

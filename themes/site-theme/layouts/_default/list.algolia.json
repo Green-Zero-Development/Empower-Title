@@ -1,0 +1,8 @@
+{{- $.Scratch.Add "index" slice -}}
+    {{- range (where .Site.Pages "Type" "page") -}}
+        {{- $.Scratch.Add "index" (dict "objectID" .File.UniqueID "title" .Title "date" .Date.UTC.Unix "excerpt" .Params.meta_description  "url" .Permalink  "type" .Type )}}
+    {{- end -}}
+    {{- range (where .Site.Pages "Type" "post") -}}
+        {{- $.Scratch.Add "index" (dict "objectID" .File.UniqueID "title" .Title "date" .Date.UTC.Unix "excerpt" .Params.excerpt  "url" .Permalink "tags" .Params.Tags "categories" .Params.Categories "type" .Type )}}
+    {{- end -}}
+{{- $.Scratch.Get "index" | jsonify -}}

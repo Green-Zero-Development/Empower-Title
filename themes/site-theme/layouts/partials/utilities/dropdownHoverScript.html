@@ -1,0 +1,25 @@
+<script>
+    var activeDropdown = {};
+    document.querySelector('#{{ .Name | urlize }}-dropdown').addEventListener('mouseover',showDropdown);
+    document.querySelector('#{{ .Name | urlize }}-dropdown').addEventListener('mouseout',hideDropdown);                                                         
+    function showDropdown(event){
+
+        for (var i = 0;i<this.children.length;i++){
+            if (this.children[i].classList.contains('{{ .Name | urlize }}-dropdown-selection')){
+                activeDropdown.id = this.id;
+                activeDropdown.element = this.children[i];
+                this.children[i].classList.add('active');
+            }
+        }
+    }
+
+    function hideDropdown(event){
+        for (var i = 0;i<this.children.length;i++){
+            if (this.children[i].classList.contains('{{ .Name | urlize }}-dropdown-selection')){
+                activeDropdown.id = this.id;
+                activeDropdown.element = this.children[i];
+                this.children[i].classList.remove('active');
+            }
+        }
+    }
+</script>

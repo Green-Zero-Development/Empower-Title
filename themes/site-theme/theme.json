@@ -1,0 +1,25 @@
+{
+   "name": "Site Theme",
+   "license": "MIT",
+   "description": "Test1",
+   "theme": "A Base theme for building full featured Hugo sites",
+   "tags": [
+      "website",
+      "starter",
+      "responsive",
+      "Disqus",
+      "blog",
+      "Tachyons"
+   ],
+   "features": [
+     "posts",
+     "shortcodes",
+     "related content",
+     "comments"
+   ],
+   "min_version": "0.30.2",
+   "author": {
+     "name": "Brendon Folsom",
+     "homepage": "greenzero.us"
+   }
+}

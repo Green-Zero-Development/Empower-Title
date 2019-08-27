@@ -1,0 +1,17 @@
+<style>
+  
+</style>
+
+<footer class="flex flex-wrap bg-color-1B5785 py-3">
+  <h6 class="w-full font-open text-sm text-white text-center"><span class="font-thin">&copy; 2019 - {{ dateFormat "Jan 2, 2006" now }}</span><span class="font-bold"> Empower Title </span></h6>
+</footer>
+
+{{ if eq .Site.Params.extraTools.elevatorJS true }}
+
+<div id="go-to-top-button">
+  <div class="elevator-button hidegotoTop">
+      <i class="fas fa-arrow-circle-up"></i>
+  </div>
+</div>
+
+{{ else }}{{ end }}

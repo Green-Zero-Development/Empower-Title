@@ -1,0 +1,32 @@
+-- Algolia Search --
+
+To toggle /search/ page, set "algoliaSearch" to true in config.toml.
+
+To hook in Algolia index, input the appId, searchKey, and indexName from Algolia dashboard into the params.algolia section in config.toml
+
+To enable auto updating of Algolia index via Google Cloud Functions, go to the GCF dashboard and create a new function. Follow these steps during the setup:
+
+- Set the memory allocation to 128MB
+- Set the runtime to Node.js 8 (if not already set)
+- Enter the code from the following gist into the "index.js" box:
+    https://gist.github.com/Green-Zero-Development/976800186b6380ae439fdae202eb4ba9
+- Enter the code from the following gist into the "package.json" box:
+    https://gist.github.com/Green-Zero-Development/31b3e5cd1c52cc722532361cf96b5cfa
+- Input "algoliaSearch" into the "Function to execute" box
+- Create three environment varibles with the following names:
+    ALGOLIA_APP_ID
+    ALGOLIA_ADMIN_KEY
+    INDEXES
+- Input the values from the Algolia dashboard that fit the names of the "ALGOLIA_APP_ID" and "ALGOLIA_ADMIN_KEY" varibles above.
+- Input the following code into the value box for the "INDEXES" varible:
+    [{"name":"test","url":"https://gz-default.netlify.com/algolia.json"}]
+- Change "test" from the above code into the name of the index you want to update (from the Algolia dashboard). Change "https://gz-default.netlify.com/algolia.json" from the above code into the location of the algolia.json file on the current website. (e.g. "https://www.greenzero.us/algolia.json", "https://www.example.com/algolia.json", etc.).
+
+- To create a schedule for an index update - first, copy the URL trigger for the function (this can be found when clicking into the function under the "Trigger" tab). Then, open the menu on the Google Cloud Functions dashboard and go to "Cloud Scheduler". Create a new scheduler by clicking on "new job".
+
+- Input the name of the index and add a description stating exactly which function the scheduler will fire. Input the following into the frequency box:
+    0 1 * * *
+- With the above frequency, the function will fire at 1AM everyday (ET).
+- Select "HTTP" from the target dropdown and input the URL trigger you copied earlier into the "URL" box. "HTTP method" should be set to "POST" and "Body" should be blank.
+
+That's it! The index is now setup!

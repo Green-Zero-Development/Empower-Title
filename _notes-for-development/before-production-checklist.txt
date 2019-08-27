@@ -1,0 +1,36 @@
+Add the following param to the front matter of any page you don't want included in site indexing:
+
+robotsdisallow = true
+
+-- Enable purgecss --
+
+UN-COMMENT
+'@fullhuman/postcss-purgecss': {},
+IN
+/themes/site-theme/src/css/postcss.config.js
+
+-- Hook up forms (example below for class references and structure) --
+
+<form class="" action="/thank-you/" netlify-honeypot="field-for-coolguys" name="" method="POST" netlify>
+    <input type="hidden" name="subject" value="New Submission from Website" />
+    <div class="">
+        <label class="">First Name*</label>
+        <input name="first-name" type="text" placeholder="First name" class="" required>
+    </div>
+    <div class="">
+        <label class="">Last Name*</label>
+        <input name="last-name" type="text" placeholder="Last name" class="" required>
+    </div>
+    <div class="">
+        <label class="">Email*</label>
+        <input name="email" type="email" placeholder="Email" class="" required>
+    </div>
+    <input type="text" name="field-for-coolguys" style="display:none" />
+    <div class="">
+        <label class="">Phone*</label>
+        <input name="phone" type="tel" placeholder="Phone Number" class="" required>
+    </div>
+    <div class="">
+        <input type="submit" value="Submit" class="">
+    </div>
+</form>
