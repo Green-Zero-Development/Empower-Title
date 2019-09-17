@@ -11,8 +11,8 @@
 
 <div class="bg-color-1B5785 py-1"></div>
 
-<div class="flex flex-wrap items-start pt-12 px-24">
-    <div class="w-1/2 pt-6 pr-12">
+<div class="flex flex-wrap items-start pt-12 lg:px-24">
+    <div class="w-5/6 lg:w-1/2 mx-auto pt-6 lg:pr-12">
         <h2 class="text-4xl font-teko">Our Story</h2>
         <p class="font-open text-lg font-light pb-3">Texas has a long history, and with it, a long chain of title on most of the property in the state. With a rich pioneer tradition and enterprising spirit, real estate transactions in the state of Texas have a considerable need for research and coverage on property purchases. This market has an unprecedented demand for strong, solvent title insurance companies.</p>
         <div class="text-color-1B5785 select-none read-more">
@@ -24,10 +24,41 @@
         <p class="pb-3">With our unique, customer-oriented philosophies, Frontier Title has solid plans for expanding to serve the entire Texas market.</p>
         </span>
     </div>
-    <div class="w-1/2 px-8 bg-cover bg-center bg-no-repeat about-us-hero">
+    <div class="w-5/6 lg:w-1/2 lg:px-8 mx-auto bg-cover bg-center bg-no-repeat about-us-hero">
         <div class="py-40"></div>
     </div>
 </div>
 
+<form class="flex flex-wrap mx-auto max-w-9xl p-8 lg:p-32" action="/thank-you/" netlify-honeypot="field-for-coolguys" name="" method="POST" netlify>
+    <input type="hidden" name="subject" value="New Submission from Website" />
+    <div class="flex flex-wrap w-full">
+        <h2 class="w-full text-4xl font-teko leading-none pb-4">Want to know more about us?</h2>
+        <p class="w-full font-open pb-8">Ask about our services or our company below</p>
+    </div>
+    <div class="flex flex-wrap w-full sm:w-1/2 xl:w-1/4 mx-auto pb-6">
+        <label class="w-full font-teko text-2xl">First Name*</label>
+        <input name="first-name" type="text" placeholder="e.g. John" class="w-full sm:w-11/12 font-open text-base border-4 p-2 focus:border-color-1B5785" required>
+    </div>
+    <div class="flex flex-wrap w-full sm:w-1/2 xl:w-1/4 mx-auto pb-6">
+        <label class="w-full font-teko text-2xl">Last Name*</label>
+        <input name="last-name" type="text" placeholder="e.g. Doe" class="w-full sm:w-11/12 font-open text-base border-4 p-2 focus:border-color-1B5785" required>
+    </div>
+    <div class="flex flex-wrap w-full sm:w-1/2 xl:w-1/4 mx-auto pb-6">
+        <label class="w-full font-teko text-2xl">Email*</label>
+        <input name="email" type="email" placeholder="e.g. johndoe@example.com" class="w-full sm:w-11/12 font-open text-base border-4 p-2 focus:border-color-1B5785" required>
+    </div>
+    <input type="text" name="field-for-coolguys" style="display:none" />
+    <div class="flex flex-wrap w-full sm:w-1/2 xl:w-1/4 mx-auto pb-6">
+        <label class="w-full font-teko text-2xl">Phone*</label>
+        <input name="phone" type="tel" placeholder="e.g. 555-867-5309" class="w-full sm:w-11/12 font-open text-base border-4 p-2 focus:border-color-1B5785" required>
+    </div>
+    <div class="flex flex-wrap w-full mx-auto pb-6">
+        <label class="w-full font-teko text-2xl">What can we help you with?*</label>
+        <textarea name="message" placeholder="Let us know what you need, e.g. ask about services, the company, or something else." class="h-32 w-full font-open text-base border-4 p-2 sm:mr-6 focus:border-color-1B5785" required></textarea>
+    </div>
+    <div class="flex flex-wrap w-full lg:w-auto">
+        <input type="submit" value="Ask about our services" class="w-full bg-color-1B5785 border-8 border-color-042947 hover:border-color-1B5785 font-teko text-xl lg:text-3xl text-white pt-2 pb-1 px-6">
+    </div>
+</form>
 
 {{ end }}
