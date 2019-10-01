@@ -13,51 +13,50 @@ description = "This domain is established to be used for illustrative examples i
     url = "/"
     weight = 1
 [[menu.desktop]]
-    identifier = "about-us"
-    name = "About Us"
-    url = "/about-us/"
-    weight = 2
-[[menu.desktop]]
     identifier = "title-101"
     name = "Title 101"
     url = "/title-101/"
-    weight = 3
+    weight = 2
 [[menu.desktop]]
     identifier = "underwriting"
     name = "Underwriting"
     url = "/underwriting/"
-    weight = 4
+    weight = 3
 [[menu.desktop]]
     identifier = "title-calculator"
-    name = "Title Calculator"
+    name = "Title Calculators"
     url = "/title-calculator/"
-    weight = 5
+    weight = 4
 [[menu.desktop]]
     identifier = "contact-us"
     name = "Contact Us"
     url = "/contact-us/"
-    weight = 6
+    weight = 5
 [[menu.mobile]]
-    identifier = "menu-mobile-1"
-    name = "Menu Item 1"
-    url = "/page-1"
+    identifier = "home"
+    name = "Home"
+    url = "/"
     weight = 1
-        [[menu.mobile]]
-            identifier = "menu-child-1"
-            name = "Menu Child 1"
-            url = "/page-11/"
-            weight = 1
-            parent = "menu-mobile-1"
 [[menu.mobile]]
-    identifier = "menu-mobile-2"
-    name = "Menu Item 2"
-    url = "/page-2"
+    identifier = "title-101"
+    name = "Title 101"
+    url = "/title-101/"
     weight = 2
 [[menu.mobile]]
-    identifier = "menu-mobile-3"
-    name = "Menu Item 3"
-    url = "/page-3"
+    identifier = "underwriting"
+    name = "Underwriting"
+    url = "/underwriting/"
     weight = 3
+[[menu.mobile]]
+    identifier = "title-calculator"
+    name = "Title Calculators"
+    url = "/title-calculator/"
+    weight = 4
+[[menu.mobile]]
+    identifier = "contact-us"
+    name = "Contact Us"
+    url = "/contact-us/"
+    weight = 5
 [params.contactNumbers]
     Fax = "555.555.5555"
     Phone = "555.555.5555"
