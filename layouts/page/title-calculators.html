@@ -1,0 +1,1359 @@
+{{ define "main" }}
+
+<style>
+label {
+  font-size: 16px;
+  font-weight: 200;
+}
+input {
+  border-width: 2px;
+  border-color: gray;
+}
+.calculator {
+  transition: .2s;
+}
+</style>
+
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+				
+<h1 class="bg-color-1B5785 font-open text-4xl lg:text-5xl font-thin text-white text-center pt-6 pb-5 leading-none">Title Calculators</h1>
+
+<div class="flex flex-wrap">
+  <a href="#new-purchase-calculator" id="new-purchase-open" class="w-full sm:w-1/4 bg-gray-200 py-5 px-2 border-4 border-white leading-none hover:bg-gray-300 hover:cursor-pointer">
+    <p class="font-teko text-2xl text-center">New Purchase Calculator</p>
+  </a>
+  <div id="refinance-open" class="w-full sm:w-1/4 bg-gray-200 py-5 px-2 border-4 border-white leading-none hover:bg-gray-300 hover:cursor-pointer">
+    <p class="font-teko text-2xl text-center">Refinance Calculator</p>
+  </div>
+  <div id="seller-net-open" class="w-full sm:w-1/4 bg-gray-200 py-5 px-2 border-4 border-white leading-none hover:bg-gray-300 hover:cursor-pointer">
+    <p class="font-teko text-2xl text-center">Seller Net Sheet</p>
+  </div>
+  <div id="buyer-net-open" class="w-full sm:w-1/4 bg-gray-200 py-5 px-2 border-4 border-white leading-none hover:bg-gray-300 hover:cursor-pointer">
+    <p class="font-teko text-2xl text-center">Buyer Cost Sheet</p>
+  </div>
+</div>
+
+<div class="pt-12"></div>
+
+<form id="new-purchase-calculator" class="overflow-hidden flex flex-wrap calculator" method="post" action="">
+  <h3 class="w-auto font-open text-3xl font-thin text-center mx-auto">New Purchase Calculator</h3>
+  <div class="flex flex-wrap w-full mx-auto text-center lg:text-left pt-12">
+    <div class="w-11/12 lg:w-auto mx-auto pt-5">
+      <label class="font-open text-base font-bold text-center lg:text-left">Enter Sales Price *</label>
+      <div class="w-full py-1 text-center">
+        <span class="bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 -mr-1 opacity-50">$</span>
+        <input class="w-56 lg:w-80 font-open text-base border-2 p-2 focus:border-color-1B5785" type="number" name="insurancesales" id="insurancesales">
+      </div>
+        <div class="text-center pt-2">
+          <input class="w-5/6 sm:w-auto bg-color-1B5785 border-4 border-color-042947 hover:bg-color-042947 font-teko text-lg text-white pt-2 pb-1 px-4 hover:cursor-pointer" name="calculate_rate_owner" type="button" id="calculate_rate_owner" onclick="calculateOwner();" value="Calculate Owner's Premium">
+      </div>
+    </div>
+  </div>
+
+<span id="insurancesales_error" class="w-full text-error font-open font-thin text-center py-3 px-2"></span>
+
+  <div class="w-full" id="owners_policy_premium" style="display: none;">
+    <div class="flex flex-wrap w-full">
+      <h5 class="w-full font-open text-2xl font-thin text-center mx-auto">Owner's Policy Premium</h5>
+      <h4 class="w-full font-open text-2xl font-bold text-center mx-auto"><span id="premone">-</span></h4>
+    </div>
+  </div>
+
+  <div class="" style="display:none">
+    Owner's Policy Premium*** 
+    <h4 class=""><span id="Loan_Policy_owner">-</span></h4>
+  </div>
+
+  <div class="w-full" id="boxLoanAmount" style="display: none">
+    <div class="flex flex-wrap w-full mx-auto text-center lg:text-left pt-12">
+      <div class="w-11/12 lg:w-auto mx-auto pt-5">
+        <label class="font-open text-base font-bold text-center lg:text-left">Enter Loan Amount</label>
+        <div class="w-full py-1 text-center">
+          <span class="bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 -mr-1 opacity-50">$</span>
+          <input class="w-56 lg:w-80 font-open text-base border-2 p-2 focus:border-color-1B5785" type="number" name="insurance_lender" id="insurance_lender">
+        </div>
+          <div class="text-center pt-2">
+            <input class="w-5/6 sm:w-auto bg-color-1B5785 border-4 border-color-042947 hover:bg-color-042947 font-teko text-lg text-white pt-2 pb-1 px-4 hover:cursor-pointer" name="calculate_rate_lender" type="button" id="calculate_rate_lender" onclick="calculateOwner();" value="Calculate Lender's Premium">
+        </div>
+      </div>
+    </div>
+  </div>
+
+      <div class="w-11/12 lg:w-1/3 mx-auto border-t-2 border-gray-300 mt-8 pt-5" id="lender_results_cont" style="display: none">
+        <div class="w-11/12 font-open mx-auto">
+          <label class="text-xs sm:text-sm font-bold">Simultaneous Issue Mortgagee Premium</label>
+          <div class="float-right font-thin text-right">$100.00</div>
+        </div>
+        <fieldset class="border my-12 p-3">
+          <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Endorsements</legend>
+          <input value="100" name="se" type="hidden" id="se">
+          <div class="w-11/12 font-open mx-auto py-3 border-b">
+            <label class="text-xs sm:text-sm font-bold">Tax Not Due and Payable</label>
+            <div class="float-right font-thin text-right">$5.00</div>
+          </div>
+          <div class="w-11/12 font-open mx-auto py-3 border-t border-b">
+            <label class="text-xs sm:text-sm font-bold">Tax Deletion</label>
+            <div class="float-right font-thin text-right">$20.00</div>
+          </div>
+          <div class="w-11/12 font-open mx-auto py-3 border-t border-b">
+            <label class="text-xs sm:text-sm font-bold">T-36 Environmental</label>
+            <div class="float-right font-thin text-right">$25.00</div>
+          </div>
+          <div class="w-11/12 font-open mx-auto py-3 border-t border-b">
+            <label class="text-xs sm:text-sm font-bold">T-19 (5% of basic premium)</label>
+            <div class="float-right font-thin text-right"><span id="T19_lender">-</span></div>
+          </div>
+        </fieldset>
+
+
+        <fieldset class="border my-12 p-3">
+          <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Optional Add-ons</legend>
+          <div class="w-11/12 font-open mx-auto py-3 border-b">
+            <label class="flex flex-wrap">
+              <input class="w-5 h-5 mr-2" type="checkbox" name="t1r_cb_new" id="t1r_cb_new" value="checkbox" onchange="calculateLender();">
+            <div class="text-xs sm:text-sm font-bold">T-1R <br/>
+              5% of Owner's Premium</div>
+            </label>
+            <div class="font-thin text-right"><span id="t1r_new">-</span></div>
+          </div>            
+          <div class="w-11/12 font-open mx-auto py-3 border-b">
+            <label class="flex flex-wrap">
+              <input class="w-5 h-5 mr-2" type="checkbox" name="hoa_cb_new" id="hoa_cb_new" value="checkbox" onchange="calculateLender();">
+            <div class="text-xs sm:text-sm font-bold">Homeowners Association - $25</div>
+            </label>
+            <div class="font-thin text-right"><span id="hoa_cb_new_v">-</span></div>
+          </div>
+          <div class="w-11/12 font-open mx-auto py-3 border-b">
+            <label class="flex flex-wrap">
+              <input class="w-5 h-5 mr-2" type="checkbox" name="ar_cb_new" id="ar_cb_new" value="checkbox" onchange="calculateLender();">
+            <div class="text-xs sm:text-sm font-bold">Adjustable Rate - $20</div>
+            </label>
+            <div class="font-thin text-right"><span id="ar_cb_new_v">-</span></div>
+          </div>
+          <div class="w-11/12 font-open mx-auto py-3 border-b">
+            <label class="flex flex-wrap">
+              <input class="w-5 h-5 mr-2" type="checkbox" name="bm_cb_new" id="bm_cb_new" value="checkbox" onchange="calculateLender();">
+            <div class="text-xs sm:text-sm font-bold">Balloon Mortgage - $25</div>
+            </label>
+            <div class="font-thin text-right"><span id="bm_cb_new_v">-</span></div>
+          </div>
+          <div class="w-11/12 font-open mx-auto py-3 border-b">
+            <label class="flex flex-wrap">
+              <input class="w-5 h-5 mr-2" type="checkbox" name="he_cb_new" id="he_cb_new" value="checkbox" onchange="calculateLender();">
+            <div class="text-xs sm:text-sm font-bold">Home Equity <br/>
+              25% of Basic Premium</div>
+            </label>
+            <div class="font-thin text-right"><span id="he_new">-</span></div>
+          </div>
+        </fieldset>
+
+    <div class="flex flex-wrap w-full">
+      <h5 class="w-full font-open text-2xl font-thin text-center mx-auto">Lender's Policy Premium</h5>
+      <h4 class="w-full font-open text-2xl font-bold text-center mx-auto"><span id="prem_lender">-</span></h4>
+    </div>
+
+    <div class="w-full" style="display: none;">
+      Basic Premium
+      <INPUT size=20 value="" name="Loan_Policy2" id="Loan_Policy2" >
+    </div>
+    <div class="font-open font-thin text-xs pt-12" ><p style="font-size: 10px;">Rate calculations are based on information obtained from the Texas Department of Insurance. These rates are effective as of May 1, 2013. This calculator is intended as an estimate only. These rates do not constitute a title commitment or an offer of service. Your actual premium may be different. ALL RATE CALCULATION INFORMATION AND QUOTES PROVIDED BY OUR SITE ARE WITHOUT REPRESENTATION OR WARRANTY AS TO THEIR RELEVANCE, ACCURACY, CORRECTNESS, OR COMPLETENESS. Final figures are subject to change. Please contact a Frontier Title Escrow Officer to confirm cost information regarding your specific transaction.<br>
+      <br>      ***This calculator is intended as an estimate only. Final figures are subject to change.</p>
+    </div>
+    <div class="row" style="display: none;">
+     Renewal&amp; Extension Credits R-8
+    </div>
+    <div class="row" style="display: none;">
+     Upto 2 years - 40% R-8 (a)
+      <input size=20 value="" name="a" id="a" >
+    </div>
+    <div class="row" style="display: none;">
+     2-3years - 35% R-8 (b)
+      <input size=20 value="" name="b" id="b" >
+    </div>
+    <div class="row" style="display: none;">
+     3-4years - 30% R-8 (c)
+      <input size=20 value="" name="c" id="c">
+    </div>
+    <div class="row" style="display: none;">
+     4-5years - 25% R-8 (d)
+      <input size=20 value="" name="d" id="d">
+    </div>
+    <div class="row" style="display: none;">
+     5-6years - 20% R-8 (e)
+      <input size=20 value="" name="e" id="e" >
+    </div>
+    <div class="row" style="display: none;">
+     6-7years - 15% R-8 (f) 
+      <input size=20 value="" name="f" id="f" >
+    </div>
+
+ </div>  
+</form>
+							
+<form name="" id="refinance-calculator" class="h-0 opacity-0 overflow-hidden flex flex-wrap calculator" method="post" action="">
+  <h3 class="w-auto font-open text-3xl font-thin text-center mx-auto">Refinance Calculator</h3>
+    <div class="flex flex-wrap w-full mx-auto text-center lg:text-left pt-12">
+      <div class="w-11/12 lg:w-auto mx-auto pt-5">
+        <label class="font-open text-base font-bold text-center lg:text-left">Enter New Loan Amount*</label>
+        <div class="w-full py-1 text-center">
+          <span class="bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 -mr-1 opacity-50">$</span>
+          <input class="w-56 lg:w-80 font-open text-base border-2 p-2 focus:border-color-1B5785" type="number" name="insurance_refi" id="insurance_refi" placeholder="10,000 minimum">
+        </div>
+      </div>
+      <span id="insurance_error_refi" class="w-full text-error font-open font-thin text-center px-2"></span>
+    </div>
+    <div class="flex flex-wrap w-full mx-auto text-center lg:text-left pt-12">
+      <div class="w-11/12 lg:w-auto mx-auto pt-5">
+        <label class="font-open text-base font-bold text-center lg:text-left">Enter Payoff Amount*</label>
+        <div class="w-full py-1 text-center">
+          <span class="bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 -mr-1 opacity-50">$</span>
+          <input class="w-56 lg:w-80 font-open text-base border-2 p-2 focus:border-color-1B5785" type="number" name="insurance2" id="insurance2">
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-wrap w-full mx-auto text-center lg:text-left pt-12">
+      <div class="w-11/12 lg:w-auto mx-auto pt-5">
+        <label class="font-open text-base font-bold text-center lg:text-left">Date of Old Loan*</label>
+        <div class="w-full py-1 text-center">
+          <input class="w-56 lg:w-80 font-open text-base border-2 p-2 focus:border-color-1B5785" type="text" value="" name="olddate" id="olddate">
+        </div>
+        <div id="date_error" class="w-full font-open font-thin text-center px-2"></div> 
+        <div class="text-center pt-2">
+          <input class="w-5/6 sm:w-auto bg-color-1B5785 border-4 border-color-042947 hover:bg-color-042947 font-teko text-lg text-white pt-2 pb-1 px-4 hover:cursor-pointer" name="calculate_rate" type="button" id="calculate_rate" onclick="calculateRate();" value="Calculate Basic Premium">
+          <input class="py-1 px-2 hover:cursor-pointer" id="reset_form" type="reset" value="Reset Form">
+        </div>
+      </div>
+    </div>
+
+      <div class="w-11/12 lg:w-1/3 mx-auto border-t-2 border-gray-300 mt-8 pt-5" id="results_cont" style="display: none;">
+        <div class="flex flex-wrap w-full">
+          <h5 class="w-full font-open text-2xl font-thin text-center mx-auto">Basic Premium</h5>
+          <h4 class="w-full font-open text-2xl font-bold text-center mx-auto"><span id="Loan_Policy_refi" >-</span></h4>
+        </div>
+        <fieldset class="border my-12 p-3">
+          <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Endorsements</legend>
+          <input value="100" name="se" type="hidden" id="se">
+          <div class="w-11/12 font-open mx-auto py-3 border-b">
+            <label class="text-xs sm:text-sm font-bold">Tax Not Due and Payable</label>
+            <div class="float-right font-thin text-right">$5.00</div>
+          </div>
+          <div class="w-11/12 font-open mx-auto py-3 border-b">
+            <label class="text-xs sm:text-sm font-bold">Tax Deletion</label>
+            <div class="float-right font-thin text-right">$20.00</div>
+          </div>
+          <div class="w-11/12 font-open mx-auto py-3 border-b">
+            <label class="text-xs sm:text-sm font-bold">T-36 Environmental</label>
+            <div class="float-right font-thin text-right">$25.00</div>
+          </div>
+          <div class="w-11/12 font-open mx-auto py-3 border-b">
+            <label class="text-xs sm:text-sm font-bold">T-19 (5% of basic premium)</label>
+            <div class="float-right font-thin text-right"><span id="T19">-</span></div>
+          </div>
+        </fieldset>
+        <fieldset class="border my-12 p-3">
+          <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Optional Add-ons</legend>
+          <div class="w-11/12 font-open mx-auto py-3 border-b">
+            <label class="flex flex-wrap">
+              <input class="w-5 h-5 mr-2" type="checkbox" name="hoa_cb_refi" id="hoa_cb_refi" value="checkbox" onchange="calculateRate();">
+            <div class="text-xs sm:text-sm font-bold">Homeowners Association - $25</div>
+            </label>
+            <div class="font-thin text-right"><span id="hoa_cb_refi_v">-</span></div>
+          </div>
+          <div class="w-11/12 font-open mx-auto py-3 border-b">
+            <label class="flex flex-wrap">
+              <input class="w-5 h-5 mr-2" type="checkbox" name="ar_cb_refi" id="ar_cb_refi" value="checkbox" onchange="calculateRate();">
+            <div class="text-xs sm:text-sm font-bold">Adjustable Rate - $20</div>
+            </label>
+            <div class="font-thin text-right"><span id="ar_cb_refi_v">-</span></div>
+          </div>
+          <div class="w-11/12 font-open mx-auto py-3 border-b">
+            <label class="flex flex-wrap">
+              <input class="w-5 h-5 mr-2" type="checkbox" name="bm_cb_refi" id="bm_cb_refi" value="checkbox" onchange="calculateRate();">
+            <div class="text-xs sm:text-sm font-bold">Balloon Mortgage - $25</div>
+            </label>
+            <div class="font-thin text-right"><span id="bm_cb_refi_v">-</span></div>
+          </div>
+          <div class="w-11/12 font-open mx-auto py-3 border-b">
+            <label class="flex flex-wrap">
+              <input class="w-5 h-5 mr-2" type="checkbox" name="he_cb_refi" id="he_cb_refi" value="checkbox" onchange="calculateRate();">
+            <div class="text-xs sm:text-sm font-bold">Home Equity <small>(T-42 &amp; T-42.1)</small><br/>
+              25% of Basic Premium</div>
+            </label>
+            <div class="font-thin text-right"><span id="he_refi">-</span></div>
+          </div>
+        </fieldset>
+        <div class="w-11/12 font-open mx-auto py-3 border-b">
+          <div class="text-xs sm:text-sm font-bold">Total Endorsements & Add-ons</div>
+          <div class="font-thin text-right"><span id="prem">-</span></div>
+        </div>
+        <div class="w-11/12 font-open mx-auto py-3 border-b">
+          <div class="text-xs sm:text-sm font-bold">Credit (R-8) </div>
+          <div class="font-thin text-right"><span id="credit">-</span></div>
+        </div>
+        <div class="row"  style="display: none;">
+          <input onclick="calculateRate();" type="button" value="Calculate Basic Premium" name="calculate_rate2" style="border:1px solid #1E5693; font-family: Arial; font-size: 8pt; font-weight:bold">
+        </div>
+        <hr/>
+        <div class="flex flex-wrap w-full">
+          <h5 class="w-full font-open text-2xl font-thin text-center mx-auto">Total Premium for Refinance***</h5>
+          <h4 class="w-full font-open text-2xl font-bold text-center mx-auto"><span id="revised">-</span></h4>
+        </div>
+
+
+
+        <div class="row"  style="display: none;">
+              <input onclick="calculateRate();" type="button" value="Calculate Basic Premium:" name="calculate_rate3" style="border:1px solid #1E5693; font-family: Arial; font-size: 8pt; font-weight:bold" id="calculate_rate3">
+        </div>
+        <div style="display: none;">
+         Basic Premium 
+          <INPUT size="20" value="" name="Loan_Policy2">
+        </div>
+        <div class="w-full">
+          <p class="font-open font-thin text-xs pt-12" ><p style="font-size: 10px;">Rate calculations are based on information obtained from the Texas Department of Insurance. These rates are effective as of May 1, 2013. This calculator is intended as an estimate only. These rates do not constitute a title commitment or an offer of service. Your actual premium may be different. ALL RATE CALCULATION INFORMATION AND QUOTES PROVIDED BY OUR SITE ARE WITHOUT REPRESENTATION OR WARRANTY AS TO THEIR RELEVANCE, ACCURACY, CORRECTNESS, OR COMPLETENESS. Final figures are subject to change. Please contact a Frontier Title Escrow Officer to confirm cost information regarding your specific transaction.<br/>
+              <br/>
+              *** This calculator is intended as an estimate only. Final figures are subject to change. </p>
+        </div>
+        <div style="display: none;">
+          Up to 2 years - 40% R-8 (a)
+          <input size="20" value="" name="a" id="a" >
+        </div>
+        <div style="display: none;">
+          2-3 years - 35% R-8 (b)
+          <input size="20" value="" name="b" id="b" >
+        </div>
+        <div style="display: none;">
+          3-4 years - 30% R-8 (c)
+         <input size="20" value="" name="c" id="c" >
+        </div>
+        <div style="display: none;">
+          4-5 years - 25% R-8 (d)
+          <input size="20" value="" name="d" id="d" >
+        </div>
+        <div style="display: none;">
+          5-6 years - 20% R-8 (e)
+          <input size="20" value="" name="e" id="e" >
+        </div>
+        <div style="display: none;">
+          6-7 years - 15% R-8 (f) 
+          <input size="20" value="" name="f" id="f" >
+        </div>
+      </div>
+</form>
+<link rel="stylesheet" href="https://frontiertitletexas.com/calculators/zebra/css/default.css" type="text/css">
+								<!--
+<script src='https://frontiertitletexas.com/calculators/data.php' ></script>
+<script src='https://frontiertitletexas.com/calculators/seller_net_sheet.js' ></script>
+-->
+
+<form name="seller_net_sheet" id="seller_net_sheet" class="h-0 opacity-0 overflow-hidden calculator" method="post" action="">
+  <h3 class="w-full font-open text-3xl font-thin text-center mx-auto">Seller Net Sheet</h3>
+    <fieldset id="seller_info" class="w-11/12 lg:w-2/3 xl:w-1/3 border my-12 mx-auto p-3">
+      <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Seller Info</legend>
+      <div class="w-11/12 lg:w-auto mx-auto pt-5">
+        <label class="font-open text-base font-bold text-center lg:text-left">Name</label>
+        <div class="w-full py-1 text-left">
+          <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" type="text" value="" name="name" id="name">
+        </div>
+      </div>
+      <div class="w-11/12 lg:w-auto mx-auto pt-5">
+        <label class="font-open text-base font-bold text-center lg:text-left">Street Address</label>
+        <div class="w-full py-1 text-left">
+          <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" type="text" value="" name="address" id="address">
+        </div>
+      </div>
+      <div class="flex flex-wrap w-11/12 lg:w-auto mx-auto pt-5">
+        <div class="w-full lg:w-1/2 pb-4">
+          <label class="font-open text-base font-bold text-center lg:text-left">City</label>
+          <div class="w-full py-1 text-left border-r-8 border-white">
+            <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" type="text" value="" name="city" id="city">
+          </div>
+        </div>
+        <div class="w-full lg:w-1/4 pb-4">
+          <label class="font-open text-base font-bold text-center lg:text-left">State</label>
+          <div class="w-full h-12 pt-1 text-left border-r-8 border-white">
+            <select class="w-full h-full font-open text-base border-2 p-2 focus:border-color-1B5785" autocomplete="off" id="state" name="state">
+              <option value="AL">Alabama</option>
+              <option value="AK">Alaska</option>
+              <option value="AZ">Arizona</option>
+              <option value="AR">Arkansas</option>
+              <option value="CA">California</option>
+              <option value="CO">Colorado</option>
+              <option value="CT">Connecticut</option>
+              <option value="DE">Delaware</option>
+              <option value="DC">District Of Columbia</option>
+              <option value="FL">Florida</option>
+              <option value="GA">Georgia</option>
+              <option value="HI">Hawaii</option>
+              <option value="ID">Idaho</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="IA">Iowa</option>
+              <option value="KS">Kansas</option>
+              <option value="KY">Kentucky</option>
+              <option value="LA">Louisiana</option>
+              <option value="ME">Maine</option>
+              <option value="MD">Maryland</option>
+              <option value="MA">Massachusetts</option>
+              <option value="MI">Michigan</option>
+              <option value="MN">Minnesota</option>
+              <option value="MS">Mississippi</option>
+              <option value="MO">Missouri</option>
+              <option value="MT">Montana</option>
+              <option value="NE">Nebraska</option>
+              <option value="NV">Nevada</option>
+              <option value="NH">New Hampshire</option>
+              <option value="NJ">New Jersey</option>
+              <option value="NM">New Mexico</option>
+              <option value="NY">New York</option>
+              <option value="NC">North Carolina</option>
+              <option value="ND">North Dakota</option>
+              <option value="OH">Ohio</option>
+              <option value="OK">Oklahoma</option>
+              <option value="OR">Oregon</option>
+              <option value="PA">Pennsylvania</option>
+              <option value="RI">Rhode Island</option>
+              <option value="SC">South Carolina</option>
+              <option value="SD">South Dakota</option>
+              <option value="TN">Tennessee</option>
+              <option value="TX" selected>Texas</option>
+              <option value="UT">Utah</option>
+              <option value="VT">Vermont</option>
+              <option value="VA">Virginia</option>
+              <option value="WA">Washington</option>
+              <option value="WV">West Virginia</option>
+              <option value="WI">Wisconsin</option>
+              <option value="WY">Wyoming</option>
+            </select>
+          </div>
+        </div>
+        <div class="w-full lg:w-1/4">
+          <label class="font-open text-base font-bold text-center lg:text-left">Zip</label>
+          <div class="w-full py-1 text-left">
+            <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" type="text" value="" name="zip" id="zip">
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset id="seller_loan_info" class="w-11/12 lg:w-2/3 xl:w-1/3 border my-12 mx-auto p-3">
+      <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Loan Info</legend>
+      <div class="flex flex-wrap text-center pb-8">
+        <label class="pb-8 lg:pb-0 w-full">
+          <input class="w-8 h-8 lg:w-5" type="radio" name="purchase_type_seller" value="mortgage" checked>
+          Mortgage</label>
+        <label class="w-full">
+          <input class="w-8 h-8 lg:w-5" type="radio" name="purchase_type_seller" value="cash">
+          Cash Sale</label>
+      </div>
+      <div class="w-11/12 lg:w-auto mx-auto pt-5">
+        <label class="font-open text-base font-bold text-center lg:text-left">Closing Date</label>
+        <div class="w-full py-1 text-left">
+          <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" type="text" value="" name="payoff_date" id="payoff_date" onfocusout="totalHOAYearlyDues()">
+        </div>
+      </div>
+      <div class="w-11/12 lg:w-auto mx-auto pt-5">
+        <label class="font-open text-base font-bold text-center lg:text-left">Purchase Price</label>
+        <div class="flex w-full py-1">
+          <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50">$</span>
+          <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="Purchase_Price" type="text" id="Purchase_Price" onchange="total_tax('');">
+          <input name="Purchase_Price_html" type="hidden" id="Purchase_Price_html">
+        </div>
+      </div>
+      <div id="mortgage_stuff_seller" style="display: none">
+        <div class="w-11/12 lg:w-auto mx-auto py-5">
+          <label class="font-open text-base font-bold text-center lg:text-left">Mortgage Type</label>
+          <div class="w-full py-1 text-left">
+            <select class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" name="Mortgage_type" id="Mortgage_type">
+              <option>Conventional</option>
+              <option>FHA</option>
+              <option>VA</option>
+              <option>USDA</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="w-11/12 font-open mx-auto mb-4 py-3 border-b">
+        <div class="text-xs sm:text-sm font-bold">Owner's Premium</div>
+        <div class="font-thin text-right"><span id="lbl_owners_premium">-</span></div>
+        <input type="hidden" id="total_owners_premium_html" name="total_owners_premium_html" />
+      </div>
+      <div class="flex flex-wrap text-center pb-8">
+        <label class="w-full font-open text-center">Paid by</label> 
+        <label class="pb-8 lg:pb-0 w-full">
+          <input class="w-6 h-6 lg:w-5" type="radio" name="owners_premium_paid_by" value="Seller" checked>
+          Seller</label>
+        <label class="w-full">
+          <input class="w-6 h-6 lg:w-5" type="radio" name="owners_premium_paid_by" value="Buyer">
+          Buyer</label>
+      </div> 
+
+      <div class="w-11/12 font-open mx-auto py-3 border-b">
+        <label class="flex flex-wrap">
+          <input class="w-5 h-5 mr-2" type="checkbox" name="seller_t1r_cb_new" id="seller_t1r_cb_new" value="checkbox" onchange="total_tax();">
+        <div class="text-xs sm:text-sm font-bold">T-1R <br/>
+          5% of Owner's Premium</div>
+        </label>
+        <div class="font-thin text-right"><span id="seller_t1r_new">-</span></div>
+        <input type="hidden" name="seller_t1r_new_html" id="seller_t1r_new_html" />
+          <input type="hidden" name="seller_t1r_new_raw" id="seller_t1r_new_raw" />
+          <input type="hidden" name="seller_t1r_paid_by_html" id="seller_t1r_paid_by_html"/>
+      </div>
+        <div class="text-center pt-4 pb-8" id="seller_t1r_paid_by_row" style="display: none">
+          <div class="flex flex-wrap">
+            <label class="w-full font-open text-center">Paid by</label> 
+            <label class="pb-8 lg:pb-0 w-full">
+              <input class="w-6 h-6 lg:w-5" type="radio" name="seller_t1r_paid_by" id="seller_t1r_paid_by" value="Seller" checked>
+              Seller</label>
+            <label class="w-full">
+              <input class="w-6 h-6 lg:w-5" type="radio" name="seller_t1r_paid_by" id="seller_t1r_paid_by" value="Buyer">
+              Buyer</label>
+            </div>
+        </div>	                    
+              
+      <!-- /mortgage-stuff -->
+      
+      <hr/>
+      <div id="payoff_loan_fieldsetH">
+        <input type="hidden" id="n_loans" name="n_loans" value="1" />
+        <!-- Start-->
+        <div class="flex flex-wrap items-center pb-3 payoff_loan_fieldset" id="payoff_loan_fieldset_1">
+          <div class="w-full lg:w-1/2">
+            <label class="font-open text-base font-bold text-center lg:text-left">Loan <span id="nloan_1">1</span></label>
+          </div>
+          <div class="flex flex-wrap w-full lg:w-1/2">
+            <div class="flex items-center w-full py-1">
+              <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+              <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="nloannn_1" type="number" id="nloannn_1">
+            </div>
+          </div>
+        </div>
+        
+        <!-- END--> 
+      </div>
+      <div class="font-open font-thin text-center"> <a class="add_loan_btn">+ Add Payoff Loan</a> </div>
+    </fieldset>
+      <fieldset id="seller_fees" class="w-11/12 lg:w-2/3 xl:w-1/3 border my-12 mx-auto p-3">
+        <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Fees</legend>
+        <div class="w-11/12 lg:w-auto mx-auto pt-5">
+          <label class="font-open text-base font-bold text-center lg:text-left">Total Broker Fee</label>
+          <div class="w-full py-1 text-left">
+            <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" name="total_broker_fee" type="text" id="total_broker_fee" onchange="split_precent_show();">
+            <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" name="total_broker_feec" type="text" id="total_broker_feec" readonly style="display: none;">
+          </div>
+        </div>
+        <div class="w-full text-center py-4">
+          <label class="font-open text-base font-thin text-center">Split Fee?</label>
+          <div class="switch round large">
+            <input class="w-5 h-5" id="split_fee_switch" name="split_fee_switch" type="checkbox">
+            <label for="split_fee_switch"></label>
+          </div>
+        </div>
+        <div class="w-11/12 lg:w-auto mx-auto pt-5" style="display:none;" id="seller_broker_fees">
+          <label class="font-open text-base font-bold text-center lg:text-left">Seller</label>
+          <div class="flex flex-wrap pb-4">
+            <div class="w-1/2 py-1 text-left border-r-4 border-white">
+              <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" name="split_precent_seller" type="text" id="split_precent_seller"  value="" size="6" onchange="split_precent_('seller');">
+            </div>
+            <div class="w-1/2 py-1 text-left border-r-4 border-white">
+              <input class="w-full bg-gray-200 font-open text-base border-2 p-2 focus:border-color-1B5785" name="split_precent_seller_c" type="text" id="split_precent_seller_c"  value="" size="12" readonly>
+            </div>
+          </div>
+            <label class="font-open text-base font-bold text-center lg:text-left">Buyer</label>
+            <div class="flex flex-wrap">
+              <div class="w-1/2 py-1 text-left border-r-4 border-white">
+                <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" name="split_precent_buyer" type="text" id="split_precent_buyer" value="" size="6" onchange="split_precent_('buyer');">
+              </div>
+              <div class="w-1/2 py-1 text-left border-r-4 border-white">
+                <input class="w-full bg-gray-200 font-open text-base border-2 p-2 focus:border-color-1B5785" name="split_precent_buyer_c" type="text" id="split_precent_buyer_c"  value="" size="12" readonly>
+              </div>
+            </div>
+            <div id="fee_error"></div>
+        </div>
+        <div class="" style="display: none">
+          <div class="flex flex-wrap items-center pb-3">
+            <div class="w-full lg:w-1/2">
+              <label class="font-open text-base font-bold text-center lg:text-left">Escrow Fees</label>
+            </div>
+            <div class="flex flex-wrap w-full lg:w-1/2">
+              <div class="flex flex-wrap items-center w-full py-1">
+                <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+                <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="escrow_fees" type="number" id="escrow_fees" value="395">
+                <input name="escrow_fees_html" type="hidden" id="escrow_fees_html" value="">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" id="seller_broker_fees" style="display: none;">
+          <div class="flex flex-wrap items-center pb-3">
+            <div class="w-full lg:w-1/2 pb-4">
+              <label class="font-open text-base font-thin text-center lg:text-left">Listing Broker Fee</label>
+              <input class="w-11/12 font-open text-base border-2 p-2 focus:border-color-1B5785" type="number">
+            </div>
+            <div class="w-full lg:w-1/2">
+              <label class="font-open text-base font-thin text-center lg:text-left">Selling Broker Fee</label>
+              <input class="w-11/12 font-open text-base border-2 p-2 focus:border-color-1B5785" type="number">
+            </div>
+          </div>
+        </div>
+      </fieldset>
+        <fieldset id="seller_property_taxes" class="w-11/12 lg:w-2/3 xl:w-1/3 border my-12 mx-auto p-3">
+          <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Property Taxes</legend>
+          <div class="flex flex-wrap w-full mx-auto pt-5">
+            <div class="w-full lg:w-1/2 pb-4">
+              <label class="font-open text-base font-bold text-center lg:text-left">City</label>
+              <div class="w-full py-1 text-left border-r-8 border-white">
+                <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" type="text" value="" name="tax_city" id="tax_city">
+              </div>
+            </div>
+            <div class="w-full lg:w-1/2 pb-4">
+              <label class="font-open text-base font-bold text-center lg:text-left">County</label>
+              <div class="w-full py-1 text-left">
+                <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" type="text" value="" name="tax_county" id="tax_county">
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center pb-4">
+            <div class="w-full lg:w-1/2">
+              <label class="font-open text-base font-bold text-center lg:text-left">Property Tax Rate</label>
+            </div>
+            <div class="flex flex-wrap w-full lg:w-1/2">
+              <div class="flex items-center w-full py-1">
+                <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="tax_rate" type="number" id="tax_rate" onchange="total_tax('taxRate');">
+                <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 postfix">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center pb-4">
+              <div class="w-full lg:w-1/2">
+                <label class="font-open text-base font-bold text-center lg:text-left">Tax Amount</label>
+              </div>
+              <div class="flex flex-wrap w-full lg:w-1/2">
+                <div class="flex items-center w-full py-1">
+                    <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+                  <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" type="number" id="total_tax_amount" onChange="total_tax('taxAmount')">
+                  <input type="hidden" id="total_tax_amount_html" name="total_tax_amount_html" />
+                </div>
+              </div>
+            </div>         
+        </fieldset>
+        <fieldset id="seller_property_taxes" class="w-11/12 lg:w-2/3 xl:w-1/3 border my-12 mx-auto p-3">
+          <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">HOA</legend>
+          <div class="flex flex-wrap items-center pb-3">
+            <div class="w-full lg:w-1/2">
+              <label class="font-open text-base font-bold text-center lg:text-left">HOA Yearly Dues</label>
+            </div>
+            <div class="flex flex-wrap w-full lg:w-1/2">
+              <div class="flex items-center w-full py-1">
+                  <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+                <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="hoa_yearly_dues" type="number" id="hoa_yearly_dues" onChange="totalHOAYearlyDues()">
+              </div>
+            </div>
+          </div>  
+          <div class="totalrow">
+            <label class="font-open text-base">Total</label>
+            <label class="font-open text-base"> <span id="total_hoa_yearly_dues" class="bold">-</span> </label>
+            <input type="hidden" id="total_hoa_yearly_dues_html" name="total_hoa_yearly_dues_html" />
+          </div>                 
+        </fieldset>      
+        <fieldset id="seller_other_expenses" class="w-11/12 lg:w-2/3 xl:w-1/3 border my-12 mx-auto p-3">
+          <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Other Expenses</legend>
+          <div class="flex flex-wrap items-center pb-4">
+            <div class="w-full lg:w-1/2">
+              <label class="font-open text-base font-bold text-center lg:text-left">Repairs</label>
+            </div>
+            <div class="flex flex-wrap w-full lg:w-1/2">
+              <div class="flex items-center w-full py-1">
+                  <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+                <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="repairs" type="number" id="repairs" onChange="total_other_expensesc()">
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center pb-4">
+            <div class="w-full lg:w-1/2">
+              <label class="font-open text-base font-bold text-center lg:text-left">Home Warranty</label>
+            </div>
+            <div class="flex flex-wrap w-full lg:w-1/2">
+              <div class="flex items-center w-full py-1">
+                  <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+                <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="warranty" type="number" id="warranty" onChange="total_other_expensesc()">
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center pb-4">
+            <div class="w-full lg:w-1/2">
+              <label class="font-open text-base font-bold text-center lg:text-left">Termite/Pest Inspection</label>
+            </div>
+            <div class="flex flex-wrap w-full lg:w-1/2">
+              <div class="flex items-center w-full py-1">
+                  <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+                <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="pest" type="number" id="pest" onChange="total_other_expensesc()">
+              </div>
+            </div>
+          </div>
+          <div class="pb-4" style="display: none">
+            <div class="flex flex-wrap items-center">
+              <div class="w=full lg:w-1/2">
+                <label class="font-open text-base font-bold text-center lg:text-left">Attorney Doc Prep Fee</label>
+              </div>
+              <div class="flex flex-wrap w-full lg:w-1/2">
+                <div class="flex items-center w-full py-1">
+                    <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+                  <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="attorney_fee" type="number" id="attorney_fee" onChange="total_other_expensesc()" value="150">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center pb-4">
+            <div class="w-full lg:w-1/2">
+              <label class="font-open text-base font-bold text-center lg:text-left">HOA Transfer/Resale Fee</label>
+            </div>
+            <div class="flex flex-wrap w-full lg:w-1/2">
+              <div class="flex items-center w-full py-1">
+                  <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+                <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="hoa_transfer" type="number" id="hoa_transfer" onChange="total_other_expensesc()">
+              </div>
+            </div>
+          </div> 
+          <div class="pb-4" style="display: none">
+            <div class="flex flex-wrap items-center">
+              <div class="w-full lg:w-1/2">
+                <label class="font-open text-base font-bold text-center lg:text-left">Tax Certificate</label>
+              </div>
+              <div class="flex flex-wrap w-full lg:w-1/2">
+                <div class="flex items-center w-full py-1">
+                    <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+                  <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="tax_certificate" type="number" id="tax_certificate" onChange="total_other_expensesc()" value="71.90">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center pb-4">
+            <div class="w-full lg:w-1/2">
+              <label class="font-open text-base font-bold text-center lg:text-left">Seller Credit to Buyer</label>
+            </div>
+            <div class="flex flex-wrap w-full lg:w-1/2">
+              <div class="flex items-center w-full py-1">
+                  <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+                <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="seller_credit_to_buyer" type="number" id="seller_credit_to_buyer" onChange="total_other_expensesc()">
+              </div>
+            </div>
+          </div>                      
+          <div class="pb-4 expense_item" id="expense_item" style="display:none">
+            <div class="flex flex-wrap items-center">
+              <div class="w-full lg:w-1/2">
+                <label class="font-open text-base font-bold text-center lg:text-left">Expense</label>
+              </div>
+              <div class="flex flex-wrap w-fullg lg:w-1/2">
+                <div class="flex items-center w-full py-1">
+                    <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+                  <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" type="number">
+                </div>
+              </div>
+            </div>
+          </div>
+          <input id="n_expensess" name="n_expensess" value="0" type="hidden" />
+          <div id="n_expense_h"></div>
+          <div class="row text-center"> <a class="button secondary small add_expense_btn">+ Add Expense</a> </div>
+          <div class="pt-8 totalrow">
+            <label class="font-open text-base">Total Other Expenses</label>
+            <label class="font-open text-base"> <span id="total_other_expenses" class="bold">-</span> </label>
+            <input type="hidden" id="total_other_expensesp" name="total_other_expensesp" value="0" />
+          </div>
+        </fieldset>
+      <div class="text-center"> <a class="w-5/6 sm:w-auto bg-color-1B5785 border-4 border-color-042947 hover:border-color-1B5785 font-teko text-lg text-white pt-2 pb-1 px-5 hover:cursor-pointer" onclick="calc_tots();">Calculate Totals</a> </div>
+
+      <fieldset id="seller_totals" class="w-11/12 lg:w-2/3 xl:w-1/3 mx-auto border my-12 p-3">
+        <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Totals</legend>
+        <div class="w-11/12 font-open mx-auto py-3 border-b">
+          <label class="text-xs sm:text-sm font-bold">Sale Price</label>
+          <div class="float-right font-thin text-right"><span id="total_sale_price" class="bold">-</span></div>
+          <input type="hidden" id="total_sale_pricep" name="total_sale_pricep" value="0" />
+        </div>
+        <div class="w-11/12 font-open mx-auto py-3 border-b">
+          <label class="text-xs sm:text-sm font-bold">Loan Balance</label>
+          <div class="float-right font-thin text-right"><span id="total_loan_balance" class="bold">-</span></div>
+          <input type="hidden" id="total_loan_balancep" name="total_loan_balancep" value="0" />
+        </div>
+        <div class="w-11/12 font-open mx-auto py-3 border-b">
+          <label class="text-xs sm:text-sm font-bold">Total Closing Cost</label>
+          <div class="float-right font-thin text-right"><span id="total_fixed_closeing" class="bold">-</span></div>
+          <input type="hidden" id="total_loan_balancep" name="total_loan_balancep" value="0" />
+        </div>
+        <div class="w-11/12 font-open mx-auto py-3 border-b">
+          <label class="text-xs sm:text-sm font-bold">Prorated Property Taxes Owed by Seller</label>
+          <div class="font-thin text-right"><span id="property_taxes_owed_by_seller" class="bold">-</span></div>
+          <input type="hidden" id="property_taxes_owed_by_sellerp" name="property_taxes_owed_by_sellerp" value="0" />
+        </div>
+        <div class="w-11/12 font-open mx-auto py-3 border-b">
+          <label class="text-xs sm:text-sm font-bold">Seller Proceeds</label>
+          <div class="float-right font-thin text-right"><span id="balance_due_at_close" class="bold">-</span></div>
+          <input type="hidden" id="balance_due_at_closep" name="balance_due_at_closep" value="0" />
+        </div>
+      </fieldset>
+      <div class="text-center"> <a  style="display: none;" target="_blank"  class="w-5/6 sm:w-auto bg-color-1B5785 border-4 border-color-042947 hover:bg-color-042947 font-teko text-lg text-white pt-2 pb-1 px-4 hover:cursor-pointer" id="seller_pdf_link"  >Download/Print PDF</a>&nbsp; <a style="display: none;" class="button small" onclick="print_it('print');">Email</a> </div>
+</form>
+<div id="print_modal" style="display: none;"></div> 
+
+								<!--
+<script src='https://frontiertitletexas.com/calculators/data.php' ></script>
+-->
+<form name="buyer_cost_sheet" class="h-0 opacity-0 overflow-hidden calculator" id="buyer_cost_sheet" method="post" action="">
+  <h3 class="w-full font-open text-3xl font-thin text-center mx-auto">Buyer Cost Sheet</h3>
+        <fieldset id="buyer_info" class="w-11/12 lg:w-2/3 xl:w-1/3 border my-12 mx-auto p-3">
+          <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Buyer Info</legend>
+          <div class="w-11/12 lg:w-auto mx-auto pt-5">
+            <label class="font-open text-base font-bold text-center lg:text-left">Name</label>
+            <div class="w-full py-1 text-left">
+              <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" type="text" value="" name="buyer_name" id="buyer_name">
+            </div>
+          </div>
+          <div class="w-11/12 lg:w-auto mx-auto pt-5">
+            <label class="font-open text-base font-bold text-center lg:text-left">Street Address</label>
+            <div class="w-full py-1 text-left">
+              <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" type="text" value="" name="buyer_address" id="buyer_address">
+            </div>
+          </div>
+          <div class="flex flex-wrap w-11/12 lg:w-auto mx-auto pt-5">
+            <div class="w-full lg:w-1/2 pb-4">
+              <label class="font-open text-base font-bold text-center lg:text-left">City</label>
+              <div class="w-full py-1 text-left border-r-8 border-white">
+                <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" type="text" value="" name="buyer_city" id="buyer_city">
+              </div>
+            </div>
+            <div class="w-full lg:w-1/4 pb-4">
+              <label class="font-open text-base font-bold text-center lg:text-left">State</label>
+              <div class="w-full h-12 pt-1 text-left border-r-8 border-white">
+                <select class="w-full h-full font-open text-base border-2 p-2 focus:border-color-1B5785" name="buyer_state" id="buyer_state" autocomplete="off">
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="DC">District Of Columbia</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY">New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX" selected>Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
+                </select>
+              </div>
+            </div>
+            <div class="w-full lg:w-1/4">
+              <label class="font-open text-base font-bold text-center lg:text-left">Zip</label>
+              <div class="w-full py-1 text-left">
+                <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" type="text" value="" name="buyer_zip" id="buyer_zip">
+              </div>
+            </div>
+          </div>
+          <!--
+	      <div class="row text-center">
+	        <a class="button small toggle_section">Done</a>
+	      </div>
+-->
+        </fieldset>
+        <fieldset id="buyer_loan_info" class="w-11/12 lg:w-2/3 xl:w-1/3 border my-12 mx-auto p-3">
+          <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Loan Info</legend>
+          <div class="flex flex-wrap text-center pb-5">
+            <label class="pb-8 lg:pb-0 w-full">
+              <input class="w-6 h-6 lg:w-5" type="radio" name="purchase_type_buyer" value="mortgage" checked>
+              Mortgage</label>
+            <label class="w-full">
+              <input class="w-6 h-6 lg:w-5" type="radio" name="purchase_type_buyer" value="cash">
+              Cash Purchase</label>
+          </div>
+          <div class="w-11/12 lg:w-auto mx-auto pt-5">
+            <label class="font-open text-base font-bold text-center lg:text-left">Purchase Price</label>
+            <div class="flex w-full py-1">
+              <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50">$</span>
+              <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" name="buyer_purchase" type="number" id="buyer_purchase" onChange="payment_do()">
+            </div>
+          </div>
+          <div class="w-11/12 lg:w-auto mx-auto pt-5">
+            <label class="font-open text-base font-bold text-center lg:text-left">Closing Date</label>
+            <div class="w-full py-1 text-left">
+              <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" type="text" value="" name="buyer_olddate" id="buyer_olddate" style="margin: 0;" onfocusout="buyerTotalHOAYearlyDues()">
+            </div>
+          </div>
+          <div id="mortgage_stuff_buyer">
+              <div class="w-11/12 lg:w-auto mx-auto py-5">
+                <label class="font-open text-base font-bold text-center lg:text-left">Mortgage Type</label>
+                <div class="w-full py-1 text-left">
+                  <select class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" name="buyer_loan_type" id="buyer_loan_type">
+                    <option>Conventional</option>
+                    <option>FHA</option>
+                    <option>VA</option>
+                    <option>USDA</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="w-11/12 lg:w-auto mx-auto pt-5">
+              <label class="font-open text-base font-bold text-center lg:text-left">Loan Amount</label>
+              <div class="flex w-full py-1">
+                <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50">$</span>
+                <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" name="buyer_loan_amtp" type="number" id="buyer_loan_amtp" onChange="payment_do()">
+              </div>
+            </div>
+            <div class="w-11/12 font-open mx-auto mb-4 py-3 border-b">
+              <div class="text-xs sm:text-sm font-bold">Down Payment</div>
+              <div class="font-thin text-right"><span id="buyer_down_payment">-</span></div>
+            </div>
+            <div class="flex flex-wrap items-center pb-4">
+              <div class="w-full lg:w-1/2">
+                <label class="font-open text-base font-bold text-center lg:text-left">Interest Rate</label>
+              </div>
+              <div class="flex flex-wrap w-full lg:w-1/2">
+                <div class="flex items-center w-full py-1">
+                  <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="buyer_intrest_rate" type="number" id="buyer_intrest_rate" onChange="payment_do()">
+                  <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 postfix">%</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-wrap items-center pb-4">
+              <div class="w-full lg:w-1/2">
+                <label class="font-open text-base font-bold text-center lg:text-left">Loan Term</label>
+              </div>
+              <div class="flex flex-wrap w-full lg:w-1/2">
+                <div class="flex items-center w-full py-1">
+                  <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="buyer_loan_term" type="number" id="buyer_loan_term" onChange="payment_do()" value="30">
+                  <span class="w-auto bg-color-1B5785 text-white font-teko text-xl py-2 px-2 opacity-50 postfix">years</span>
+                </div>
+              </div>
+            </div> 	
+            <div id="source_ownersPremium_origem">
+	            <div id="source_ownersPremium">
+		            <div class="w-11/12 font-open mx-auto mb-4 py-3 border-b">
+                  <div class="text-xs sm:text-sm font-bold">Owner's Premium</div>
+                  <div class="font-thin text-right"><span id="buyer_title_insp">-</span></div>
+                  <input type="hidden" name="buyer_title_insp_raw" id="buyer_title_insp_raw" />
+                  <input type="hidden" name="buyer_title_insp_html" id="buyer_title_insp_html" />
+                  <input type="hidden" name="buyer_owners_premium_paid_by_html" id="buyer_owners_premium_paid_by_html"/>
+                </div>
+                <div class="flex flex-wrap text-center pt-4 pb-8">
+                  <label class="w-full font-open text-center">Paid by</label> 
+                  <label class="pb-8 lg:pb-0 w-full">
+                    <input class="w-6 h-6 lg:w-5" type="radio" name="buyer_owners_premium_paid_by" id="buyer_owners_premium_paid_by" value="Seller">
+                    Seller</label>
+                  <label class="w-full">
+                    <input class="w-6 h-6 lg:w-5" type="radio" name="buyer_owners_premium_paid_by" id="buyer_owners_premium_paid_by" value="Buyer" checked>
+                    Buyer</label>
+                </div>
+		          </div> 
+            </div>   
+            <div class="w-11/12 font-open mx-auto mb-4 py-3 border-b">
+              <div class="text-xs sm:text-sm font-bold">Monthly Payment (P&I)</div>
+              <div class="font-thin text-right"><span id="buyer_monthly_pip">-</span></div>
+              <input name="buyer_monthly_pip_html" id="buyer_monthly_pip_html" type="hidden" />
+            </div>       		
+          <!-- /mortgage-stuff -->
+          <div id="destination_ownersPremium"></div>           
+        </fieldset>
+  
+        <div id="mortgage_stuff2_buyer" class="w-11/12 lg:w-1/3 mx-auto border-t-2 border-gray-300 mt-8 pt-5">
+          <div class="w-11/12 font-open mx-auto">
+            <label class="text-xs sm:text-sm font-bold">Simultaneous Issue Mortgagee Premium</label>
+            <div class="float-right font-thin text-right">$100.00</div>
+          </div>
+          <fieldset class="border my-12 p-3">
+            <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Endorsements</legend>
+            <input value="100" name="se" type="hidden" id="se">
+            <div class="w-11/12 font-open mx-auto py-3 border-b">
+              <label class="text-xs sm:text-sm font-bold">Tax Not Due and Payable</label>
+              <div class="float-right font-thin text-right">$5.00</div>
+            </div>
+            <div class="w-11/12 font-open mx-auto py-3 border-t border-b">
+              <label class="text-xs sm:text-sm font-bold">Tax Deletion</label>
+              <div class="float-right font-thin text-right">$20.00</div>
+            </div>
+            <div class="w-11/12 font-open mx-auto py-3 border-t border-b">
+              <label class="text-xs sm:text-sm font-bold">T-36 Environmental</label>
+              <div class="float-right font-thin text-right">$25.00</div>
+            </div>
+            <div class="w-11/12 font-open mx-auto py-3 border-t border-b">
+              <label class="text-xs sm:text-sm font-bold">T-19 (5% of basic premium)</label>
+              <div class="float-right font-thin text-right"><span id="buyer_T19_lender">-</span></div>
+              <input type="hidden" id="buyer_T19_lender_html" name="buyer_T19_lender_html"/>
+              <input type="hidden" id="buyer_endorsements_raw" name="buyer_endorsements_raw"/>
+            </div>
+          </fieldset>
+          <fieldset class="border my-12 p-3">
+            <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Optional Add-ons</legend>
+            <div id="source_t1r_origem">
+              <div id="source_t1r">
+                <div class="w-11/12 font-open mx-auto py-3 border-b">
+                  <label class="flex flex-wrap">
+                    <input class="w-5 h-5 mr-2" type="checkbox" name="buyer_t1r_cb_new" id="buyer_t1r_cb_new" value="checkbox" onchange="buyerCalculateLender();">
+                  <div class="text-xs sm:text-sm font-bold">T-1R <br/>
+                    5% of Owner's Premium</div>
+                  </label>
+                  <div class="font-thin text-right"><span id="buyer_t1r_new">-</span></div>
+                  <input type="hidden" name="buyer_t1r_new_html" id="buyer_t1r_new_html" />
+                  <input type="hidden" name="buyer_t1r_new_raw" id="buyer_t1r_new_raw" />
+                  <input type="hidden" name="buyer_t1r_paid_by_html" id="buyer_t1r_paid_by_html"/>
+                </div>
+                <div class="text-center pt-4 pb-8" id="buyer_t1r_paid_by_row" style="display: none">
+                  <div class="flex flex-wrap">
+                    <label class="w-full font-open text-center">Paid by</label> 
+                    <label class="pb-8 lg:pb-0 w-full">
+                      <input class="w-6 h-6 lg:w-5" type="radio" name="buyer_t1r_paid_by" id="buyer_t1r_paid_by" value="Seller">
+                      Seller</label>
+                    <label class="w-full">
+                      <input class="w-6 h-6 lg:w-5" type="radio" name="buyer_t1r_paid_by" id="buyer_t1r_paid_by" value="Buyer" checked>
+                      Buyer</label>
+                  </div>
+                </div>  
+              </div>
+            </div>          
+            <div class="w-11/12 font-open mx-auto py-3 border-b">
+              <label class="flex flex-wrap">
+                <input class="w-5 h-5 mr-2" type="checkbox" name="buyer_hoa_cb_new" id="buyer_hoa_cb_new" value="checkbox" onchange="buyerCalculateLender();">
+              <div class="text-xs sm:text-sm font-bold">Homeowners Association - $25</div>
+              </label>
+              <div class="font-thin text-right"><span id="buyer_hoa_cb_new_v">-</span></div>
+              <input type="hidden" name="buyer_hoa_cb_new_v_html" id="buyer_hoa_cb_new_v_html" />
+            </div>
+            <div class="w-11/12 font-open mx-auto py-3 border-b">
+              <label class="flex flex-wrap">
+                <input class="w-5 h-5 mr-2" type="checkbox" name="buyer_ar_cb_new" id="buyer_ar_cb_new" value="checkbox" onchange="buyerCalculateLender();">
+              <div class="text-xs sm:text-sm font-bold">Adjustable Rate - $20</div>
+              </label>
+              <div class="font-thin text-right"><span id="buyer_ar_cb_new_v">-</span></div>
+              <input type="hidden" name="buyer_ar_cb_new_v_html" id="buyer_ar_cb_new_v_html" />
+            </div>
+            <div class="w-11/12 font-open mx-auto py-3 border-b">
+              <label class="flex flex-wrap">
+                <input class="w-5 h-5 mr-2" type="checkbox" name="buyer_bm_cb_new" id="buyer_bm_cb_new" value="checkbox" onchange="buyerCalculateLender();">
+              <div class="text-xs sm:text-sm font-bold">Balloon Mortgage - $25</div>
+              </label>
+              <div class="font-thin text-right"><span id="buyer_bm_cb_new_v">-</span></div>
+              <input type="hidden" name="buyer_bm_cb_new_v_html" id="buyer_bm_cb_new_v_html" />
+            </div>
+            <div class="w-11/12 font-open mx-auto py-3 border-b">
+              <label class="flex flex-wrap">
+                <input class="w-5 h-5 mr-2" type="checkbox" name="buyer_he_cb_new" id="buyer_he_cb_new" value="checkbox" onchange="buyerCalculateLender();">
+              <div class="text-xs sm:text-sm font-bold">Home Equity <br/>
+                25% of Basic Premium</div>
+              </label>
+              <div class="font-thin text-right"><span id="buyer_he_new">-</span></div>
+              <input type="hidden" name="buyer_he_new_html" id="buyer_he_new_html" />
+            </div>
+          </fieldset>
+  
+      <div class="flex flex-wrap w-full">
+        <h5 class="w-full font-open text-2xl font-thin text-center mx-auto">Lender's Policy Premium</h5>
+        <h4 class="w-full font-open text-2xl font-bold text-center mx-auto"><span id="buyer_prem_lender">-</span></h4>
+        <input type="hidden" name="buyer_prem_lender_html" id="buyer_prem_lender_html" />
+        <input type="hidden" name="buyer_prem_lender_raw" id="buyer_prem_lender_raw">
+      </div>
+
+      <div class="font-open font-thin text-xs pt-12" ><p style="font-size: 10px;">Rate calculations are based on information obtained from the Texas Department of Insurance. These rates are effective as of May 1, 2013. This calculator is intended as an estimate only. These rates do not constitute a title commitment or an offer of service. Your actual premium may be different. ALL RATE CALCULATION INFORMATION AND QUOTES PROVIDED BY OUR SITE ARE WITHOUT REPRESENTATION OR WARRANTY AS TO THEIR RELEVANCE, ACCURACY, CORRECTNESS, OR COMPLETENESS. Final figures are subject to change. Please contact a Frontier Title Escrow Officer to confirm cost information regarding your specific transaction.<br>
+        <br>      ***This calculator is intended as an estimate only. Final figures are subject to change.</p>
+      </div>
+      
+  
+   </div>   
+
+    <fieldset id="buyer_fees" class="w-11/12 lg:w-2/3 xl:w-1/3 border my-12 mx-auto p-3" style="display: none">
+      <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Other Title Fees</legend>
+      <div class="flex flex-wrap items-center pb-3">
+        <div class="w-full lg:w-1/2">
+          <label class="font-open text-base font-bold text-center lg:text-left">Escrow Fee</label>
+        </div>
+        <div class="flex flex-wrap w-full lg:w-1/2">
+          <div class="flex items-center w-full py-1">
+              <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+            <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="buyer_excrow" type="number" id="buyer_excrow" value="395"  onChange="buyer_feest();">
+          </div>
+        </div>
+      </div>  
+      <div class="totalrow">
+        <label class="font-open text-base">Total Fees</label>
+        <label class="font-open text-base"> <span id="buyer_total_fees" class="bold">-</span> </label>
+      </div>                 
+    </fieldset>
+
+    <fieldset id="buyer_recording_charges" class="w-11/12 lg:w-2/3 xl:w-1/3 border my-12 mx-auto p-3" style="display: none">
+      <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Recording Charges</legend>
+      <div class="flex flex-wrap items-center pb-3">
+        <div class="w-full lg:w-1/2">
+          <label class="font-open text-base font-bold text-center lg:text-left">Warranty Deed</label>
+        </div>
+        <div class="flex flex-wrap w-full lg:w-1/2">
+          <div class="flex items-center w-full py-1">
+              <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+            <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="buyer_rec_deed" type="number" id="buyer_rec_deed" value="25" onChange="buyer_rec_feest('');">
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center pb-3">
+        <div class="w-full lg:w-1/2">
+          <label class="font-open text-base font-bold text-center lg:text-left">Mortgage Deed</label>
+        </div>
+        <div class="flex flex-wrap w-full lg:w-1/2">
+          <div class="flex items-center w-full py-1">
+              <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+            <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="buyer_rec_more" type="number" id="buyer_rec_more" value="100" onChange="buyer_rec_feest('');">
+          </div>
+        </div>
+      </div>  
+      <div class="totalrow">
+        <label class="font-open text-base">Total Recording Charges</label>
+        <label class="font-open text-base"> <span id="buyer_total_rec_fees" class="bold">-</span> </label>
+      </div>                 
+    </fieldset>
+
+    <fieldset id="seller_property_taxes" class="w-11/12 lg:w-2/3 xl:w-1/3 border my-12 mx-auto p-3">
+      <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Taxes</legend>
+      <div class="flex flex-wrap w-full mx-auto pt-5">
+        <div class="w-full lg:w-1/2 pb-4">
+          <label class="font-open text-base font-bold text-center lg:text-left">City</label>
+          <div class="w-full py-1 text-left border-r-8 border-white">
+            <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" type="text" value="" name="buyer_rec_city" id="buyer_rec_city">
+          </div>
+        </div>
+        <div class="w-full lg:w-1/2 pb-4">
+          <label class="font-open text-base font-bold text-center lg:text-left">County</label>
+          <div class="w-full py-1 text-left">
+            <input class="w-full font-open text-base border-2 p-2 focus:border-color-1B5785" type="text" value="" name="buyer_rec_county" id="buyer_rec_county">
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center pb-4">
+        <div class="w-full lg:w-1/2">
+          <label class="font-open text-base font-bold text-center lg:text-left">Property Tax Rate</label>
+        </div>
+        <div class="flex flex-wrap w-full lg:w-1/2">
+          <div class="flex items-center w-full py-1">
+            <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="buyer_taxrate" type="number" id="buyer_taxrate" onChange="buyer_rec_feest('taxRate');">
+            <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 postfix">%</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center pb-4">
+          <div class="w-full lg:w-1/2">
+            <label class="font-open text-base font-bold text-center lg:text-left">Tax Amount</label>
+          </div>
+          <div class="flex flex-wrap w-full lg:w-1/2">
+            <div class="flex items-center w-full py-1">
+                <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+              <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="buyer_total_tax_amount" type="number" id="buyer_total_tax_amount" onChange="buyer_rec_feest('taxAmount')">
+              <input type="hidden" name="buyer_total_tax_amount_html" id="buyer_total_tax_amount_html" />
+            </div>
+          </div>
+        </div>         
+    </fieldset> 
+    
+    <fieldset id="seller_property_taxes" class="w-11/12 lg:w-2/3 xl:w-1/3 border my-12 mx-auto p-3" style="display: none">
+      <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">HOA</legend>
+      <div class="flex flex-wrap items-center pb-3">
+        <div class="w-full lg:w-1/2">
+          <label class="font-open text-base font-bold text-center lg:text-left">HOA Yearly Dues</label>
+        </div>
+        <div class="flex flex-wrap w-full lg:w-1/2">
+          <div class="flex items-center w-full py-1">
+              <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+            <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="buyer_hoa_yearly_dues" type="number" id="buyer_hoa_yearly_dues" onChange="buyerTotalHOAYearlyDues()">
+            <input type="hidden" name="buyer_hoa_yearly_dues_raw" id="buyer_hoa_yearly_dues_raw">
+          </div>
+        </div>
+      </div>  
+      <div class="totalrow">
+        <label class="font-open text-base">Total</label>
+        <label class="font-open text-base"> <span id="buyer_total_hoa_yearly_dues" class="bold">-</span> </label>
+        <input type="hidden" id="buyer_total_hoa_yearly_dues_html" name="buyer_total_hoa_yearly_dues_html" />
+      </div>                 
+    </fieldset>
+
+    <fieldset id="buyer_other_expenses" class="w-11/12 lg:w-2/3 xl:w-1/3 border my-12 mx-auto p-3">
+      <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Other Expenses</legend>
+      <div class="flex flex-wrap items-center pb-4">
+        <div class="w-full lg:w-1/2">
+          <label class="font-open text-base font-bold text-center lg:text-left">Hazard Insurance</label>
+        </div>
+        <div class="flex flex-wrap w-full lg:w-1/2">
+          <div class="flex items-center w-full py-1">
+              <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+            <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="buyer_hazard" type="number" id="buyer_hazard" onchange="buyer_othert();">
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center pb-4">
+        <div class="w-full lg:w-1/2">
+          <label class="font-open text-base font-bold text-center lg:text-left">Repairs</label>
+        </div>
+        <div class="flex flex-wrap w-full lg:w-1/2">
+          <div class="flex items-center w-full py-1">
+              <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">($)</span>
+            <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="buyer_repairs" type="number" id="buyer_repairs" onchange="buyer_othert();">
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center pb-4">
+        <div class="w-full lg:w-1/2">
+          <label class="font-open text-base font-bold text-center lg:text-left">Home Warranty</label>
+        </div>
+        <div class="flex flex-wrap w-full lg:w-1/2">
+          <div class="flex items-center w-full py-1">
+              <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+            <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="buyer_waranty" type="number" id="buyer_waranty" onchange="buyer_othert();">
+          </div>
+        </div>
+      </div>
+      <div class="pb-4" style="display: none">
+        <div class="flex flex-wrap items-center">
+          <div class="w=full lg:w-1/2">
+            <label class="font-open text-base font-bold text-center lg:text-left">Termite/Pest Inspection</label>
+          </div>
+          <div class="flex flex-wrap w-full lg:w-1/2">
+            <div class="flex items-center w-full py-1">
+                <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+              <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="buyer_pest" type="number" id="buyer_pest" onchange="buyer_othert();">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center pb-4">
+        <div class="w-full lg:w-1/2">
+          <label class="font-open text-base font-bold text-center lg:text-left">HOA Transfer/Resale Fee</label>
+        </div>
+        <div class="flex flex-wrap w-full lg:w-1/2">
+          <div class="flex items-center w-full py-1">
+              <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+            <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="hoa_transfer" type="number" id="hoa_transfer" onChange="total_other_expensesc()">
+          </div>
+        </div>
+      </div> 
+      <div class="pb-4" style="display: none">
+        <div class="flex flex-wrap items-center">
+          <div class="w-full lg:w-1/2">
+            <label class="font-open text-base font-bold text-center lg:text-left">Attorney Doc Prep Fee</label>
+          </div>
+          <div class="flex flex-wrap w-full lg:w-1/2">
+            <div class="flex items-center w-full py-1">
+                <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+              <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="buyer_attorney_fee" type="number" id="buyer_attorney_fee" onChange="buyer_othert()" value="200">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center pb-4">
+        <div class="w-full lg:w-1/2">
+          <label class="font-open text-base font-bold text-center lg:text-left">Seller Credit to Buyer</label>
+        </div>
+        <div class="flex flex-wrap w-full lg:w-1/2">
+          <div class="flex items-center w-full py-1">
+              <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">($)</span>
+            <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="buyer_seller_credit" type="number" id="buyer_seller_credit" onchange="buyer_othert();">
+          </div>
+        </div>
+      </div>                      
+      <div class="pb-4 expense_item" id="expense_item" style="display:none">
+        <div class="flex flex-wrap items-center">
+          <div class="w-full lg:w-1/2">
+            <label class="font-open text-base font-bold text-center lg:text-left">Expense</label>
+          </div>
+          <div class="flex flex-wrap w-fullg lg:w-1/2">
+            <div class="flex items-center w-full py-1">
+                <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>
+              <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" type="number">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="buyer_other_expenses_holder"></div>
+      <div class="row text-center"> <a class="button secondary small" onClick="buyer_other_expenses_btn()">+ Add Expense</a> </div>
+      <div class="pt-8 totalrow">
+        <label class="font-open text-base">Total Other Expenses</label>
+        <label class="font-open text-base"> <span id="buyer_total_other_expenses" class="bold">-</span> </label>
+        <input type="hidden" id="buyer_total_other_expenses_raw" name="buyer_total_other_expenses_raw" value="-1" />
+        <input type="hidden" id="buyer_total_other_expenses_html" name="buyer_total_other_expenses_html" />
+      </div>
+    </fieldset>
+
+    <div class="text-center"> <a class="w-5/6 sm:w-auto bg-color-1B5785 border-4 border-color-042947 hover:border-color-1B5785 font-teko text-lg text-white pt-2 pb-1 px-5 hover:cursor-pointer" onclick="buyer_Calculate_Totals();">Calculate Totals</a> </div>
+
+    <fieldset id="buyer_totals" class="w-11/12 lg:w-2/3 xl:w-1/3 mx-auto border my-12 p-3">
+      <legend class="bg-gray-500 text-white py-1 px-3 -mt-32">Totals</legend>
+      <div class="w-11/12 font-open mx-auto py-3 border-b">
+        <label class="text-xs sm:text-sm font-bold">Purchase Price</label>
+        <div class="float-right font-thin text-right"><span class="bold" id="buyer_purchase_rpicep">-</span></div>
+        <input type="hidden" id="buyer_purchase_rpice" name="buyer_purchase_rpicep" value="-1" />
+      </div>
+      <div class="w-11/12 font-open mx-auto py-3 border-b">
+        <label class="text-xs sm:text-sm font-bold">Total Closing Cost</label>
+        <div class="float-right font-thin text-right"><span class="bold" id="buyer_total_fixedp">-</span></div>
+        <input type="hidden" id="buyer_total_fixed_raw" name="buyer_total_fixed" value="-1"/>
+      </div>
+      <div class="w-11/12 font-open mx-auto py-3 border-b">
+        <label class="text-xs sm:text-sm font-bold">Prorated Property Taxes Owed by Seller</label>
+        <div class="float-right font-thin text-right"><span class="bold" id="buyer_tax_owedp">-</span></div>
+        <input type="hidden" id="buyer_tax_owed_raw" name="buyer_tax_owed_raw" value="-1"/>
+        <input type="hidden" id="buyer_tax_owed_html" name="buyer_tax_owed_html" value="-1"/>
+      </div>
+      <div class="w-11/12 font-open mx-auto py-3 border-b">
+        <label class="text-xs sm:text-sm font-bold">Balance Due at Close</label>
+        <div class="font-thin text-right"><span class="bold" id="buyer_balancep">-</span></div>
+        <input type="hidden" id="buyer_balance_raw" name="buyer_balance" value="-1"/>
+      </div>
+      <div class="w-11/12 font-open mx-auto py-3 border-b">
+        <label class="text-xs sm:text-sm font-bold">Monthly Payment (P&I)</label>
+        <div class="font-thin text-right"><span class="bold" id="buyer_monthly_pipc">-</span></div>
+      </div>
+    </fieldset>
+
+    <div class="text-center"> <a  style="display: none;" target="_blank"  class="w-5/6 sm:w-auto bg-color-1B5785 border-4 border-color-042947 hover:bg-color-042947 font-teko text-lg text-white pt-2 pb-1 px-4 hover:cursor-pointer" d="buyer_pdf_link"  >Download/Print PDF</a>&nbsp; <a style="display: none;" class="button small" onclick="buyer_print_it('print');">Email</a> </div>
+  
+</form>
+<div id="buyer_print_modal"></div>
+
+<div class="flex flex-wrap">
+  <div class="w-5/6 lg:w-1/3 mx-auto text-2xs font-thin py-12">Title Insurance Premium Rates are based on the sales price and/or loan amount of the property and are set by the Department of Insurance for the State of Texas. Additional premium and/or endorsement costs may be charged in conjunction with a lender transaction. Please be sure to enter an amount of at least $10,000.00 as this is the basic minimum premium amount that a policy will be issued for by the State of Texas.</div>
+</div>
+              
+{{ partial "calculators/calculator-script.html" . }}
+
+<div class="pb-12"></div>
+
+{{ end }}

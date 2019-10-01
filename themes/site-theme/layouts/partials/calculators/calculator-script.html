@@ -1,0 +1,976 @@
+<script>
+    const opennewPurchase = document.querySelector('#new-purchase-open');
+    const openRefinance = document.querySelector('#refinance-open');
+    const opensellerNet = document.querySelector('#seller-net-open');
+    const openbuyerNet = document.querySelector('#buyer-net-open');
+    const newPurchase = document.querySelector('#new-purchase-calculator');
+    const refinance = document.querySelector('#refinance-calculator');
+    const sellerNet = document.querySelector('#seller_net_sheet');
+    const buyerNet = document.querySelector('#buyer_cost_sheet');
+    
+    opennewPurchase.onclick = function() {
+      newPurchase.classList.remove('h-0');
+      newPurchase.classList.remove('opacity-0');
+      refinance.classList.remove('h-full');
+      refinance.classList.remove('opacity-100');
+      sellerNet.classList.remove('h-full');
+      sellerNet.classList.remove('opacity-100');
+      buyerNet.classList.remove('h-full');
+      buyerNet.classList.remove('opacity-100');
+    }
+    openRefinance.onclick = function() {
+      newPurchase.classList.add('h-0');
+      newPurchase.classList.add('opacity-0');
+      refinance.classList.add('h-full');
+      refinance.classList.add('opacity-100');
+      sellerNet.classList.remove('h-full');
+      sellerNet.classList.remove('opacity-100');
+      buyerNet.classList.remove('h-full');
+      buyerNet.classList.remove('opacity-100');
+    }
+    opensellerNet.onclick = function() {
+      newPurchase.classList.add('h-0');
+      newPurchase.classList.add('opacity-0');
+      refinance.classList.remove('h-full');
+      refinance.classList.remove('opacity-100');
+      sellerNet.classList.add('h-full');
+      sellerNet.classList.add('opacity-100');
+      buyerNet.classList.remove('h-full');
+      buyerNet.classList.remove('opacity-100');
+    }
+    openbuyerNet.onclick = function() {
+      newPurchase.classList.add('h-0');
+      newPurchase.classList.add('opacity-0');
+      refinance.classList.remove('h-full');
+      refinance.classList.remove('opacity-100');
+      sellerNet.classList.remove('h-full');
+      sellerNet.classList.remove('opacity-100');
+      buyerNet.classList.add('h-full');
+      buyerNet.classList.add('opacity-100');
+    }
+</script>
+
+
+
+<script src='https://frontiertitletexas.com/calculators/data.php' ></script>
+
+<script>
+function calculateOwner() {
+  //console.log('calculateOwner()');
+  var insurancevalue;
+  var loan_Policy = "";
+  insurancevalue = $('#insurancesales').val();
+  loan_Policy = basic_premium2(insurancevalue);
+  var loan_Policy_cash_f = "$" + Number(loan_Policy).formatMoney()
+  $('#Loan_Policy_owner').html(loan_Policy_cash_f);
+  $('#premone').html(loan_Policy_cash_f);
+  insurancevalue = $('#insurance2').val();
+  $('#Loan_Policy2').val("$" + Number(loan_Policy).formatMoney());
+  $('#revised').val(loan_Policy_cash_f);
+}
+
+function calculateLender() {
+  //console.log('calculateLender()');
+  var insurancevalue;
+  var nmbSalesPrice;
+  var loan_Policy = "";
+  var ownersBasicPremiumCalculated = "";
+  var more = 150;
+  insurancevalue = $('#insurance_lender').val();
+  nmbSalesPrice = $('#insurancesales').val();
+  loan_Policy = basic_premium2(insurancevalue);
+  ownersBasicPremiumCalculated = basic_premium2(nmbSalesPrice);
+  var loan_Policy_cash_f = "$" + Number(loan_Policy).formatMoney();
+  $('#Loan_Policy_lender').html(loan_Policy_cash_f);
+  var t19_ = (loan_Policy * .05);
+
+  if (t19_ < 50) {
+    t19_ = 50
+  };
+    more += Number(t19_);
+  $('#T19_lender').html("$"+t19_.formatMoney());
+  if ($("#hoa_cb_new").is(":checked")) {
+    more += 25;
+  }
+  if ($("#ar_cb_new").is(":checked")) {
+    more += 20;
+  }
+  if ($("#bm_cb_new").is(":checked")) {
+    more += 25;
+  }
+  if ($("#hoa_cb_new").is(":checked")) {
+    $("#hoa_cb_new_v").html("$25");
+  } else {
+    $("#hoa_cb_new_v").html("-");
+  }
+  if ($("#ar_cb_new").is(":checked")) {
+    $("#ar_cb_new_v").html("$20");
+  } else {
+    $("#ar_cb_new_v").html("-");
+  }
+  if ($("#bm_cb_new").is(":checked")) {
+    $("#bm_cb_new_v").html("$25");
+  } else {
+    $("#bm_cb_new_v").html("-");
+  }
+  if ($("#t1r_cb_new").is(":checked")) {
+    var t1r_more = (ownersBasicPremiumCalculated * 0.05);
+    
+    if(t1r_more < 50){
+    	t1r_more = 50;
+    }    
+    
+    more += t1r_more;
+    t1r_more = t1r_more.toFixed(2);
+    $("#t1r_new").html("$" + Number(t1r_more).formatMoney(2));
+  } else {
+    $("#t1r_new").html("-");
+  }
+  if ($("#he_cb_new").is(":checked")) {
+    var he_more = (loan_Policy * 0.25);
+    
+    if(he_more < 50){
+    	he_more = 50;
+    }
+    
+    more += he_more;
+    he_more = he_more.toFixed(2);
+    $("#he_new").html("$" + Number(he_more).formatMoney(2));
+  } else {
+    $("#he_new").html("-");
+  }
+  //console.log('more == ' + more);
+  //var perm_ = (Number(more) + Number(insurancevalue));
+  var perm_ = Number(more) ;
+  $("#prem_lender").html("$" + perm_.formatMoney(2));
+  var a_ = (loan_Policy * .40);
+  var b_ = (loan_Policy * .35);
+  var c_ = (loan_Policy * .30);
+  var d_ = (loan_Policy * .25);
+  var e_ = (loan_Policy * .20);
+  var f_ = (loan_Policy * .15);
+  $('#a').val("$" + (a_ * .4).formatMoney(2));
+  $('#b').val("$" + (b_ * .4).formatMoney(2));
+  $('#c').val("$" + (c_ * .4).formatMoney(2));
+  $('#d').val("$" + (d_ * .4).formatMoney(2));
+  $('#e').val("$" + (e_ * .4).formatMoney(2));
+  $('#f').val("$" + (f_ * .4).formatMoney(2));
+  $('#Loan_Policy2').val("$" + Number(loan_Policy).formatMoney(2));
+  $('#date_error').html('').removeClass("error")
+}
+</script>
+
+<script>
+jQuery(document).ready(function($) {
+   	$('#calculate_rate_owner').click(function(){
+		if ($("#insurancesales").val() < 10000) {
+			$('#insurancesales_error').html("The state of Texas does not issue policies less than $10,000").addClass("error");
+			$("#owners_policy_premium").slideUp('fast');
+			$("#boxLoanAmount").slideUp('fast');
+		} else {
+			$('#insurancesales_error').html("").removeClass("error");
+			$("#owners_policy_premium").slideDown('fast');
+			$("#boxLoanAmount").slideDown('fast');
+		}
+	});
+
+});
+</script>
+
+<script>
+jQuery(document).ready(function($) {
+	
+	//$("#calculate_rate_lender").attr("disabled", true);
+
+	$('#calculate_rate_lender').click(function(){
+		if ($("#insurance_lender").val() < 1) {
+			$('#insurance_lender_error').html("Please enter a Loan Amount").addClass("error");
+			$("#lender_results_cont").slideUp('fast');
+		} else {
+			$('#insurance_lender_error').html("").removeClass("error");
+			$("#lender_results_cont").slideDown('fast');			
+		}
+
+	});
+
+});
+</script>
+
+<script src='https://frontiertitletexas.com/calculators/data.php' ></script>
+<script src='https://frontiertitletexas.com/calculators/calculator_refinance2.js' ></script>
+
+<script src='https://frontiertitletexas.com/calculators/zebra/javascript/zebra_datepicker.js' ></script>
+
+<script>
+jQuery(document).ready(function($) {
+    $('#olddate').Zebra_DatePicker({
+         direction: false,
+        first_day_of_week: 0,
+        default_position: "below",
+        offset: [-244,-5],
+		format: 'm/d/Y',
+		view: 'years'
+       	});
+});
+</script>
+
+<script> var calculator_path = 'https://frontiertitletexas.com/calculators';
+
+</script>
+
+<script>
+
+function pad(numb) {
+    return (numb < 10 ? '0' : '') + numb;
+}
+
+var n_expenses = 0;
+var taxPaidBuyerToSeller = 0;
+jQuery(document).ready(function($) {
+  var n_loans = 1;
+  var dateToday = new Date();
+
+  var year  = pad(dateToday.getFullYear());
+  var month = pad(dateToday.getMonth() + 1);
+  var day   = pad(dateToday.getDate()); 
+  
+  //dateToday = year + "-" + month + "-" + day;
+  
+  //Initialize the $('#payoff_date')
+  $('#payoff_date').val(month + "/" + day + "/" + year);
+  
+  $('.add_loan_btn').click(function() {
+    n_loans++;
+    //$('#payoff_loan_fieldset').clone().insertAfter(".payoff_loan_fieldset:last").find('input[type="number"]').val(n_loans);
+    $('#payoff_loan_fieldsetH').append('<div class="payoff_loan_fieldset" id="payoff_loan_fieldset_' + n_loans + '"> <div class="flex flex-wrap items-center pb-3" id="payoff_loan_fieldset_1"> <div class="w-full lg:w-1/2"> <label class="font-open text-base font-bold text-center lg:text-left">Loan <span id="nloan_' + n_loans + '">' + n_loans + '</span></label> </div> <div class="flex flex-wrap w-full lg:w-1/2"> <div class="flex flex-wrap items-center w-full py-1"> <span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span> <input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" name="nloannn_' + n_loans + '" type="number" id="nloannn_' + n_loans + '"> </div> </div> </div> </div>');
+    $('#n_loans').val(n_loans);
+  });
+  $('#split_fee_switch').attr('checked', false);
+  $('input#split_fee_switch').change(function() {
+    if ($(this).is(':checked')) {
+      $("#seller_broker_fees").slideDown('fast');
+    } else {
+      $("#seller_broker_fees").slideUp('fast');
+    }
+  });
+  $('.add_expense_btn').click(function() {
+    n_expenses++;
+    var ss = '';
+    ss += '<div class="flex flex-wrap pb-4">';
+    ss += '<div class="w-full lg:w-1/2">';
+    ss += '<label><input class="w-auto font-open text-base border-2 mb-4 p-2 focus:border-color-1B5785" id="n_expense_' + n_expenses + '"  name="n_expense_' + n_expenses + '" type="text" placeholder="Expense"></label>';
+    ss += '</div>';
+    ss += '<div class="flex w-full lg:w-1/2"><span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>';
+    ss += '<input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" id="n_expense_c' + n_expenses + '"  name="n_expense_c' + n_expenses + '" type="number" onChange="total_other_expensesc()" >';
+    ss += '</div></div>';
+    $('#n_expense_h').append(ss);
+    $('#n_expensess').val(n_expenses);
+    //$('#expense_item').clone().css("display", "block").insertAfter(".expense_item:last").find('input[type="number"]').val('');
+  });
+  /*$('input:radio[name="purchase_type_seller"]').change(function() {
+    if ($(this).is(':checked') && $(this).val() == 'mortgage') {
+      $("#mortgage_stuff_seller").slideDown('fast');
+    } else {
+      $("#mortgage_stuff_seller").slideUp('fast');
+    }
+  });*/
+
+  $('#payoff_date').Zebra_DatePicker({
+    first_day_of_week: 0,
+    default_position: "below",
+    offset: [-244, -5],
+    format: 'm/d/Y'
+  });
+});
+
+function calculateDoyDays(dateToProcess){
+
+	if(!dateToProcess){
+		dateToProcess = Date();
+	}
+
+  var olddate__ = new Date(dateToProcess);
+  
+  var doy = olddate__.getDOY();
+  //To be zero based
+  doy -= 1;
+  var days = 365;
+
+  if (olddate__.isLeapYear()) {
+    days = 366;
+  }
+  
+  return (days - doy ) / days;
+}
+
+//Extras function sto this view
+function totalHOAYearlyDues(){
+    taxPaidBuyerToSeller = (currToNum($('#hoa_yearly_dues').val()) * calculateDoyDays($('#payoff_date').val()))
+
+    if(taxPaidBuyerToSeller == 0){
+    	$('#total_hoa_yearly_dues').html('-');
+    }else{
+    	$('#total_hoa_yearly_dues').html('($' + taxPaidBuyerToSeller.formatMoney() + ')');    
+    	$('#total_hoa_yearly_dues_html').val('($' + taxPaidBuyerToSeller.formatMoney(2) + ')');	
+    }
+    
+    total_tax("");
+}
+
+function total_tax(origin) {
+  var worth 	= currToNum($('#Purchase_Price').val());
+  //var rate 	= (Number($('#tax_rate').val()) / 100);
+  var rate 		= currToNum($('#tax_rate').val());
+  var taxAmount = currToNum($('#total_tax_amount').val());
+
+    if(origin == "taxAmount"){
+        if(worth != 0){
+            rate = (taxAmount / worth) * 100
+            $('#tax_rate').val(rate.formatMoney(2).replace(/\,/g,''));
+        }else{
+            alert("Please enter a Purchase Price");
+            $('#Purchase_Price').focus();
+        }
+    }else{
+        rate = (currToNum($('#tax_rate').val()) / 100);
+        taxAmount = (worth * rate);
+        $('#total_tax_amount').val(taxAmount.formatMoney(2).replace(/\,/g,''));
+    }  
+
+  var numberTemp = basic_premium2(worth);
+
+  if(numberTemp == -1){
+    numberTemp = 0;
+  }
+  
+  if(taxAmount == 0){
+  	$('#total_tax_amount').val("");
+  }else{
+  	$('#total_tax_amount').val(currToNum($('#total_tax_amount').val()).formatMoney(2).replace(/\,/g,''));
+  }
+  
+  if ($("#seller_t1r_cb_new").is(":checked")) {  	
+  	$("#seller_t1r_paid_by_row").slideDown('fast');
+    var seller_t1r = (numberTemp * 0.05);
+    
+    if(seller_t1r < 50){
+    	seller_t1r = 50;
+    }
+    $('#seller_t1r_new_raw').val(seller_t1r);
+    //numberTemp += seller_t1r;
+    seller_t1r = seller_t1r.toFixed(2);
+    $("#seller_t1r_new").html("$" + Number(seller_t1r).formatMoney(2));
+    $("#seller_t1r_new_html").val("$" + Number(seller_t1r).formatMoney(2));
+  } else {
+  	$('#seller_t1r_new_raw').val(0);
+  	$("#seller_t1r_paid_by_row").slideUp('fast');
+    $("#seller_t1r_new").html("-");
+    $("#seller_t1r_new_html").val("-");
+  }  
+
+  if(rate == 0){
+  	$('#tax_rate').val("");
+  }else{
+  	$('#tax_rate').val(currToNum($('#tax_rate').val()).formatMoney(2));
+  }
+  
+  if(worth == 0){
+  	$('#Purchase_Price').val("");	
+  }else{
+  	$('#Purchase_Price').val(worth.formatMoney(0));
+  }
+  
+  $('#lbl_owners_premium').html('$' + numberTemp.formatMoney());  
+  
+  //Prepare vars to PDF/Email
+  $('#Purchase_Price_html').val('$' + worth.formatMoney(2));
+  $('#total_owners_premium_html').val('$' + numberTemp.formatMoney(2));
+  $('#escrow_fees_html').val('$' + currToNum($('#escrow_fees').val()).formatMoney(2));
+  $('#total_tax_amount_html').val('$' + taxAmount.formatMoney(2));
+  $("#seller_t1r_paid_by_html").val($("input[name='seller_t1r_paid_by']:checked").val());  
+  
+}
+
+function total_other_expensesc() {
+  var ee = 0;
+  //ee += Number($('#Hazard_Insurance').val());
+  ee += Number($('#repairs').val());
+  ee += Number($('#warranty').val());
+  ee += Number($('#pest').val());    
+  ee += Number($('#hoa_transfer').val());
+  ee += Number($('#seller_credit_to_buyer').val());
+  for (var kk = 1; kk <= n_expenses; kk++) {
+    ee += Number($('#n_expense_c' + kk).val());
+  }
+  $('#total_other_expenses').html('$' + ee.formatMoney());
+  $('#total_other_expensesp').val('$' + ee.formatMoney());
+}
+
+function calc_tots() {
+  total_tax("");
+  total_other_expensesc();
+  totalHOAYearlyDues();
+  var nn = 0;
+  $.ajax({
+    type: "POST",
+    async: false,
+    url: "https://frontiertitletexas.com/calculators/ajax/_seller_net_sheet.php",
+    data: $('#seller_net_sheet').serialize(),
+    success: function(resp) {
+      d = JSON.parse(resp);
+      $('#total_loan_balance').html(d['total_loan_balance']);
+      $('#total_loan_balancep').val(d['total_loan_balancep']);
+      $('#total_sale_price').html(d['total_sale_price']);
+      $('#total_sale_pricep').val(d['total_sale_price']);
+      $('#total_fixed_closeing').html(d['total_fixed_closeing']);
+      $('#property_taxes_owed_by_seller').html(d['tax_paid']);
+      $('#balance_due_at_close').html(d['balance_due_at_close']);
+      $('#total_fixed_closeingp').val(d['total_fixed_closeing']);
+      $('#property_taxes_owed_by_sellerp').val(d['tax_paid']);
+      $('#balance_due_at_closep').val(d['balance_due_at_close']);
+    }
+  });
+  
+  print_it('pdf');
+}
+
+function split_precent_show() {
+  $.ajax({
+    type: "POST",
+    url: "https://frontiertitletexas.com/calculators/ajax/_seller_net_sheet_split_fee.php",
+    data: $('#seller_net_sheet').serialize(),
+    success: function(resp) {
+      d = JSON.parse(resp);
+      if (d['error'] != '') {
+        $('#fee_error').html(d['error']);
+      } else {
+        $('#fee_error').html('');
+        $('#total_broker_fee').val(d['total_broker_fee']);
+        $('#total_broker_feec').val(d['total_broker_feec']);
+        $('#split_precent_seller').val(d['split_precent_seller']);
+        $('#split_precent_buyer').val(d['split_precent_buyer']);
+        $('#split_precent_seller_c').val(d['split_precent_seller_c']);
+        $('#split_precent_buyer_c').val(d['split_precent_buyer_c']);
+      }
+    }
+  });
+}
+
+function split_precent_(w) {
+  $.ajax({
+    type: "POST",
+    url: "https://frontiertitletexas.com/calculators/ajax/_seller_net_sheet_split_fee.php?mode=" + w,
+    data: $('#seller_net_sheet').serialize(),
+    success: function(resp) {
+      d = JSON.parse(resp);
+      if (d['error'] != '') {
+        $('#fee_error').html(d['error']);
+      } else {
+        $('#fee_error').html('');
+        $('#total_broker_fee').val(d['total_broker_fee']);
+        $('#total_broker_feec').val(d['total_broker_feec']);
+        $('#split_precent_seller').val(d['split_precent_seller']);
+        $('#split_precent_buyer').val(d['split_precent_buyer']);
+        $('#split_precent_seller_c').val(d['split_precent_seller_c']);
+        $('#split_precent_buyer_c').val(d['split_precent_buyer_c']);
+      }
+    }
+  });
+}
+
+function print_it(w) {
+  $('#seller_pdf_link').hide();
+  $.ajax({
+    type: "POST",
+    url: "https://frontiertitletexas.com/calculators/ajax/_seller_net_sheet_print.php?mode=" + w,
+    data: $('#seller_net_sheet').serialize(),
+    success: function(resp) {
+      if (w == 'print') {
+        $('#print_modal').html(resp);
+        //$('#seller_net_sheet').hide();        
+        $('#print_modal').show();
+      }
+      if (w == 'pdf') {
+          d = JSON.parse(resp);
+        var fpp = calculator_path + '/files/' + d
+          //        window.open(fpp, '_blank');
+        $('#seller_pdf_link').attr('href', fpp);
+        $('#seller_pdf_link').slideDown();
+        return false;
+      }
+    }
+  });
+}
+</script>
+
+<script src='https://frontiertitletexas.com/calculators/buyer_cost_sheet.js' ></script>
+
+<script>
+var n_bexpenses = 0;
+var buyer_total_fees__ = 0;
+var buyer_total_rec_fees__ = 0;
+var buyer_total_other_expenses__ = 0;
+var purchaseTypeBuyerClicked = "mortgage";
+function pad(numb) {
+    return (numb < 10 ? '0' : '') + numb;
+}
+function buyer_other_expenses_btn() {
+  n_bexpenses++;
+  var ss = '';
+  ss += '<div class="flex flex-wrap pb-4">';
+  ss += '<div class="w-full lg:w-1/2">';
+  ss += '<label><input class="w-auto font-open text-base border-2 mb-4 p-2 focus:border-color-1B5785" id="n_expense_' + n_bexpenses + '"  name="n_expense_' + n_bexpenses + '" type="text" placeholder="Expense"></label>';
+  ss += '</div>';
+  ss += '<div class="flex w-full lg:w-1/2"><span class="w-auto bg-color-1B5785 text-white font-teko text-2xl py-1 px-3 opacity-50 prefix">$</span>';
+  ss += '<input class="w-auto font-open text-base border-2 p-2 focus:border-color-1B5785" id="n_bexpense_c' + n_bexpenses + '"  name="n_bexpense_c' + n_bexpenses + '" type="number" onChange="total_other_expensesc()" >';
+  ss += '</div></div>';
+  $('#buyer_other_expenses_holder').append(ss);
+  $('#n_bexpensess').val(n_bexpenses);
+}
+jQuery(document).ready(function($) {
+ var dateToday = new Date();
+
+  var year  = pad(dateToday.getFullYear());
+  var month = pad(dateToday.getMonth() + 1);
+  var day   = pad(dateToday.getDate()); 
+  
+  //dateToday = year + "-" + month + "-" + day;
+  
+  //Initialize the $('#buyer_olddate')
+  $('#buyer_olddate').val(month + "/" + day + "/" + year);	
+	
+  $('#buyer_olddate').Zebra_DatePicker({
+    first_day_of_week: 0,
+    default_position: "below",
+    offset: [-244, -5],
+    format: 'm/d/Y',
+		view: 'years'
+  });
+  $('input:radio[name="purchase_type_buyer"]').change(function() {
+    if ($(this).is(':checked') && $(this).val() == 'mortgage') {
+    	purchaseTypeBuyerClicked = "mortgage";
+      $("#mortgage_stuff_buyer").slideDown('fast');
+      $("#mortgage_stuff2_buyer").slideDown('fast');
+      $("#monthly_payment_stuff").slideDown('fast');
+      $("#source_ownersPremium").detach().appendTo("#source_ownersPremium_origem");
+      $("#source_t1r").detach().appendTo("#source_t1r_origem");
+    } else {
+    	purchaseTypeBuyerClicked = "cash";
+      $("#mortgage_stuff_buyer").slideUp('fast');
+      $("#mortgage_stuff2_buyer").slideUp('fast');
+      $("#monthly_payment_stuff").slideUp('fast');
+      $("#source_ownersPremium").detach().appendTo("#destination_ownersPremium");
+      $("#source_t1r").detach().appendTo("#destination_ownersPremium");
+    }
+  });
+});
+
+
+function buyerCalculateLender() {
+  var insurancevalue;
+  var nmbSalesPrice;
+  var loan_Policy = "";
+  var ownersBasicPremiumCalculated = "";
+  var more = 150;
+
+  if(purchaseTypeBuyerClicked == "cash"){
+  	insurancevalue = 0;
+  }else{
+  	insurancevalue = $('#buyer_loan_amtp').val();
+  }
+
+  nmbSalesPrice = $('#buyer_purchase').val();
+  loan_Policy = basic_premium2(insurancevalue);
+  ownersBasicPremiumCalculated = basic_premium2(nmbSalesPrice);
+
+  var t19_ = (loan_Policy * .05);
+
+  if (t19_ < 50) {
+    t19_ = 50
+  };
+  //console.log("t19_ = " + t19_);
+  more += Number(t19_);
+  $('#buyer_endorsements_raw').val(more);
+
+  $('#buyer_T19_lender').html("$"+t19_.formatMoney());
+  
+  if ($("#buyer_hoa_cb_new").is(":checked")) {
+    more += 25;
+  }
+  if ($("#buyer_ar_cb_new").is(":checked")) {
+    more += 20;
+  }
+  if ($("#buyer_bm_cb_new").is(":checked")) {
+    more += 25;
+  }
+  if ($("#buyer_hoa_cb_new").is(":checked")) {
+    $("#buyer_hoa_cb_new_v").html("$25.00");
+  } else {
+    $("#buyer_hoa_cb_new_v").html("-");
+  }
+  if ($("#buyer_ar_cb_new").is(":checked")) {
+    $("#buyer_ar_cb_new_v").html("$20.00");
+  } else {
+    $("#buyer_ar_cb_new_v").html("-");
+  }
+  if ($("#buyer_bm_cb_new").is(":checked")) {
+    $("#buyer_bm_cb_new_v").html("$25.00");
+  } else {
+    $("#buyer_bm_cb_new_v").html("-");
+  }
+  if ($("#buyer_t1r_cb_new").is(":checked")) {
+  	$("#buyer_t1r_paid_by_row").slideDown('fast');
+  	
+  	var t1r_more = (ownersBasicPremiumCalculated * 0.05);
+    
+    if(t1r_more < 50){
+    	t1r_more = 50;
+    }
+    
+    if($("input[name='purchase_type_buyer']:checked").val() == "mortgage"){ 
+    	more += t1r_more;
+    }
+    t1r_more = t1r_more.toFixed(2);
+    
+    $('#buyer_t1r_new_raw').val(t1r_more);
+    $("#buyer_t1r_new").html("$" + Number(t1r_more).formatMoney(2));
+  } else {
+  	$("#buyer_t1r_paid_by_row").slideUp('fast');
+    $("#buyer_t1r_new").html("-");
+    $('#buyer_t1r_new_raw').val(0);
+  }
+  if ($("#buyer_he_cb_new").is(":checked")) {
+    var he_more = (loan_Policy * 0.25);
+    
+    if(he_more < 50){
+    	he_more = 50;
+    }
+    
+    more += he_more;
+    he_more = he_more.toFixed(2);
+    $("#buyer_he_new").html("$" + Number(he_more).formatMoney(2));
+  } else {
+    $("#buyer_he_new").html("-");
+  }
+  //console.log('more == ' + more);
+  //var perm_ = (Number(more) + Number(insurancevalue));
+  var perm_ = Number(more) ;
+  if(purchaseTypeBuyerClicked == "cash"){
+  	if ($("#buyer_t1r_cb_new").is(":checked")) {
+  		perm_ = Number(t1r_more);
+  	}else{
+  		perm_ = Number(0);
+  	}
+  }  
+
+  $("#buyer_prem_lender").html("$" + perm_.formatMoney(2));
+  $("#buyer_prem_lender_raw").val(perm_);
+}
+
+
+function payment_do() {
+
+	buyerCalculateLender();
+	buyer_rec_feest("");
+		
+  if ($('#buyer_intrest_rate').val() < 0) {
+    $('#buyer_intrest_rate').val(0);
+  }
+  var apr = ($('#buyer_intrest_rate').val() / 100);
+  var n = $('#buyer_loan_term').val() * 12;
+  if (n < 1) {
+    $('#buyer_loan_term').val(1)
+    n = 12;
+  }
+  if ($('#buyer_loan_amtp').val() < 0) {
+    $('#buyer_loan_amtp').val(0);
+  }
+	//console.log("purchaseTypeBuyerClicked=" + purchaseTypeBuyerClicked);
+	//console.log("$('#buyer_purchase').val()=" + $('#buyer_purchase').val());
+
+  var	dp = ($('#buyer_purchase').val() - $('#buyer_loan_amtp').val());
+
+  
+  var pv = $('#buyer_purchase').val();
+
+  $('#buyer_down_payment').html('$' + dp.formatMoney());
+  
+  var paymant_ = payment(apr, n, pv);
+
+  var buyer_title_insp__ = Number(basic_premium2(pv));
+  if (paymant_ <= 0) {
+    $('#buyer_monthly_pip').html(' - ');
+  } else {
+    $('#buyer_monthly_pip').html('$' + paymant_.formatMoney());
+  }
+  //console.log('buyer_title_insp__ ');
+  //console.log(buyer_title_insp__);
+  if (buyer_title_insp__ <= 0) {
+    $('#buyer_title_insp').html(' - ');
+    $('#buyer_title_insp_raw').val(0);
+  } else {
+    $('#buyer_title_insp').html('$' + buyer_title_insp__.formatMoney());
+    $('#buyer_title_insp_raw').val(buyer_title_insp__);
+  }
+}
+function payment(apr, n, pv) {
+  //console.log('payment(' + apr + ',' + n + ',' + pv + ')');
+  if (apr < 0) {
+    return -1;
+  }
+  if (isNaN(apr) || isNaN(n) || isNaN(pv)) {
+    return -1;
+  }
+  var fv = 0.0;
+  var prec = 4;
+  if (apr != 0) {
+    alpha = 1 / (1 + apr / 12);
+    retval = (pv * (1 - alpha) / alpha / (1 - Math.pow(alpha, n)));
+  } else {
+    retval = (pv / n);
+  }
+  retval = (Math.round(retval * 100) / 100)
+  return retval;
+}
+function buyer_feest() {
+  var fees = 0;
+  fees += Number($('#buyer_excrow').val());
+  buyer_total_fees__ = Number(fees);
+  $('#buyer_total_fees').html('$' + Number(fees).formatMoney());
+}
+function buyer_rec_feest(origin) {
+  var fees = 0;
+  fees += Number($('#buyer_rec_deed').val());
+  
+	if($("input[name='purchase_type_buyer']:checked").val() == "mortgage"){ 
+		fees += Number($('#buyer_rec_more').val());
+  		fees += Number($('#buyer_attorney_fee').val());
+	} 
+  
+  buyer_total_rec_fees__ = Number(fees);
+  $('#buyer_total_rec_fees').html('$' + buyer_total_rec_fees__.formatMoney());
+    
+  //Total Recording Charges should include tax costs (rate times purchase price).
+  var tp = Number($('#buyer_purchase').val());
+  var pp = (Number($('#buyer_taxrate').val()) / 100);
+  var taxAmount = currToNum($('#buyer_total_tax_amount').val());
+
+    if(origin == "taxAmount"){
+        if(tp != 0){
+            pp = (taxAmount / tp) * 100
+            $('#buyer_taxrate').val(pp.formatMoney(2).replace(/\,/g,''));
+        }else{
+            alert("Please enter a Purchase Price");
+            $('#buyer_purchase').focus();
+        }
+    }else{
+        pp = (currToNum($('#buyer_taxrate').val()) / 100);
+        taxAmount = (tp * pp);
+        
+        if(taxAmount == 0){
+        	$('#buyer_total_tax_amount').val("");	
+        }else{
+        	$('#buyer_total_tax_amount').val(taxAmount.formatMoney(2).replace(/\,/g,''));
+        }      
+    }  
+
+    $('#buyer_tax_owed_by_seller').html("($" + (taxAmount * (buyerCalculateDoyDays($('#buyer_olddate').val()))).formatMoney(2) + ")");
+    $('#buyer_total_tax_amount_html').val("$" + taxAmount.formatMoney(2));
+    $('#buyer_taxrate_cash').val(taxAmount); 
+}
+function buyerCalculateDoyDays(dateToProcess){
+
+	if(!dateToProcess){
+		dateToProcess = Date();
+	}
+
+  var olddate__ = new Date(dateToProcess);
+  
+  var doy = olddate__.getDOY();
+  //To be zero based
+  doy -= 1;
+  var days = 365;
+
+  if (olddate__.isLeapYear()) {
+    days = 366;
+  }
+
+  return doy / days;
+}
+
+function buyerCalculateDoyDaysToBuyer(dateToProcess){
+
+	if(!dateToProcess){
+		dateToProcess = Date();
+	}
+
+  var olddate__ = new Date(dateToProcess);
+  
+  var doy = olddate__.getDOY();
+  //To be zero based
+  doy -= 1;
+  var days = 365;
+
+  if (olddate__.isLeapYear()) {
+    days = 366;
+  }
+
+  return (days - doy ) / days;
+}
+
+//Extras function sto this view
+function buyerTotalHOAYearlyDues(){
+    var taxPaidBuyerToSeller = (currToNum($('#buyer_hoa_yearly_dues').val()) * buyerCalculateDoyDaysToBuyer($('#buyer_olddate').val()))
+
+    if(taxPaidBuyerToSeller == 0){
+    	$('#buyer_total_hoa_yearly_dues').html('-');
+    	$('#buyer_hoa_yearly_dues_raw').val(0);
+    }else{
+    	$('#buyer_total_hoa_yearly_dues').html('$' + taxPaidBuyerToSeller.formatMoney() );    
+    	$('#buyer_total_hoa_yearly_dues_html').val('$' + taxPaidBuyerToSeller.formatMoney(2) );	
+  		$('#buyer_hoa_yearly_dues_raw').val(taxPaidBuyerToSeller);
+    }
+    
+    buyer_rec_feest("");
+}
+
+function buyer_othert() {
+  var fees = 0;
+  fees += Number($('#buyer_hazard').val());
+  fees -= Number($('#buyer_repairs').val());
+  fees += Number($('#buyer_waranty').val());
+  fees += Number($('#buyer_pest').val()); 
+  fees -= Number($('#buyer_seller_credit').val());
+  //1:m
+  for (var kk = 1; kk <= n_bexpenses; kk++) {
+    fees += Number($('#n_bexpense_c' + kk).val());
+  }
+  buyer_total_other_expenses__ = Number(fees);
+  $('#buyer_total_other_expenses').html('$' + Number(fees).formatMoney());
+    $('#buyer_total_other_expenses_raw').val(Number(fees));
+}
+function buyer_Calculate_Totals() {
+  payment_do();
+  buyer_feest();
+  buyer_rec_feest('');
+  buyerTotalHOAYearlyDues();
+  buyer_othert();
+
+  var bpp = Number($('#buyer_purchase').val()); 
+   
+  if(purchaseTypeBuyerClicked == "cash"){
+  	$('#buyer_loan_amtp').val(0);
+  }
+    
+  var blp = Number($('#buyer_loan_amtp').val());
+  var bdp = bpp - blp;
+  //console.log('bpp = '+bpp+' '+bpp.formatMoney());
+  //console.log('bdp = '+bdp+' '+bdp.formatMoney());
+  $('#buyer_purchase_rpice').val(bpp);
+  $('#buyer_purchase_rpicep').html('$' + bpp.formatMoney());
+  
+  var premLenderRaw = Number($("#buyer_prem_lender_raw").val()); 
+  var taxPaidSellerToBuyer = Number($('#buyer_hoa_yearly_dues_raw').val());
+  var buyer_total_fixedp__ = (buyer_total_fees__ + buyer_total_rec_fees__ + buyer_total_other_expenses__ + premLenderRaw + taxPaidSellerToBuyer);
+/*
+console.log("buyer_total_fees__ = " + buyer_total_fees__);
+console.log("buyer_total_rec_fees__ = " + buyer_total_rec_fees__);
+console.log("buyer_total_other_expenses__ = " + buyer_total_other_expenses__);
+console.log("premLenderRaw = " + premLenderRaw);
+console.log("taxPaidSellerToBuyer = " + taxPaidSellerToBuyer);
+*/
+	if($("input[name='buyer_owners_premium_paid_by']:checked").val() == "Buyer"){ 
+	    //Button Buyer was Pressed
+	    buyer_total_fixedp__ += Number($('#buyer_title_insp_raw').val());
+	}  
+	
+	if($("input[name='buyer_t1r_paid_by']:checked").val() == "Seller"){
+	    //Button Seller was Pressed
+	    buyer_total_fixedp__ -= Number($('#buyer_t1r_new_raw').val());
+	}       	     
+
+  $('#buyer_total_fixedp').html('$' + buyer_total_fixedp__.formatMoney(2));
+  $('#buyer_total_fixed_raw').val(buyer_total_fixedp__);
+  var btr = (Number($('#buyer_taxrate').val()) / 100);
+  var buyer_olddate__ = new Date($('#buyer_olddate').val());
+  var doy = buyer_olddate__.getDOY();
+  var days = 365;
+  if (buyer_olddate__.isLeapYear()) {
+    days = 366;
+  }
+
+  var buyer_tax_owedp__ = ((bpp * btr) * (buyerCalculateDoyDays($('#buyer_olddate').val())));
+  if (isNaN(buyer_tax_owedp__)) { buyer_tax_owedp__ = 0; }
+  $('#buyer_tax_owedp').html('$' + buyer_tax_owedp__.formatMoney());
+  $('#buyer_tax_owed_raw').val(buyer_tax_owedp__);
+ // var buyer_balancep__ = ((bpp - bdp) + buyer_total_fixedp__ + buyer_tax_owedp__);
+  var buyer_balancep__ =  (bdp + buyer_total_fixedp__ - buyer_tax_owedp__);
+  //console.log('buyer_balancep__' + buyer_balancep__);
+  $('#buyer_balancep').html('$' + buyer_balancep__.formatMoney());
+  $('#buyer_balance_raw').val(buyer_balancep__);
+  $('#buyer_monthly_pipc').html(   $('#buyer_monthly_pip').html( ));
+  
+  //Prepare fields for PDF
+  $('#buyer_title_insp_html').val('$' + Number($('#buyer_title_insp_raw').val()).formatMoney(2));
+  $("#buyer_owners_premium_paid_by_html").val($("input[name='buyer_owners_premium_paid_by']:checked").val());
+  $("#buyer_t1r_paid_by_html").val($("input[name='buyer_t1r_paid_by']:checked").val());   
+  $('#buyer_T19_lender_html').val($('#buyer_T19_lender').html());
+  $('#buyer_t1r_new_html').val($('#buyer_t1r_new').html());
+  $('#buyer_hoa_cb_new_v_html').val($('#buyer_hoa_cb_new_v').html());
+  $('#buyer_ar_cb_new_v_html').val($('#buyer_ar_cb_new_v').html());
+  $('#buyer_bm_cb_new_v_html').val($('#buyer_bm_cb_new_v').html());
+  $('#buyer_he_new_html').val($('#buyer_he_new').html());
+  $('#buyer_prem_lender_html').val($('#buyer_prem_lender').html());
+  $('#buyer_excrow_html').val(getPersonalFormat($('#buyer_excrow').val(), 2, "$"));
+  $('#buyer_monthly_pip_html').val($('#buyer_monthly_pip').html());
+  $('#buyer_total_other_expenses_html').val($('#buyer_total_other_expenses').html());
+  $('#buyer_tax_owed_html').val($('#buyer_tax_owedp').html());
+  $('#buyer_taxrate_html').val(getPersonalFormat(Number($('#buyer_taxrate').val()), 3, "%"));
+  
+  
+  buyer_print_it('pdf');
+}
+function getMoneyFormat(auxNumber){
+	if((auxNumber == "") || (Number(auxNumber) == 0)) {
+		return "-";
+	}else{
+		return '$' + Number(auxNumber).formatMoney(2);
+	}
+}
+
+function getPersonalFormat(auxNumber, decimals, sign){
+	if((auxNumber == "") || (Number(auxNumber) == 0)) {
+		return "-";
+	}else{
+		if(sign == "%"){
+			return Number(auxNumber).formatMoney(decimals) + "%";
+		}else{
+			return sign + Number(auxNumber).formatMoney(decimals);
+		}
+	}
+}
+function buyer_print_it(w) {
+  $('#buyer_print_modal').hide();
+  $('#buyer_pdf_link').hide();
+  $.ajax({
+    type: "POST",
+    url: "https://frontiertitletexas.com/calculators/ajax/_buyer_cost_sheet_print.php?mode=" + w,
+    data: $('#buyer_cost_sheet').serialize(),
+    success: function(resp) {
+      if (w == 'print') {
+        $('#buyer_print_modal').html(resp);
+        //$('#seller_net_sheet').hide();        
+        $('#buyer_print_modal').slideDown();
+      }
+      if (w == 'pdf') {
+        var fpp = calculator_path + '/files/' + resp;
+        $('#buyer_pdf_link').attr('href', fpp);
+        $('#buyer_pdf_link').slideDown();
+        // window.open(fpp, '_blank');
+        //        $('#buyer_pdf_link').click();
+        return false;
+      }
+    }
+  });
+}
+</script>

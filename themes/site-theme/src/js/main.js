@@ -76,3 +76,13 @@ readmore.onclick = function() {
   readmoreContent.classList.toggle('text-lg');
   readmoreCarot.classList.toggle('fa-caret-up');
 }
+
+var readmore2 = document.querySelector('.read-more2');
+var readmoreContent2 = document.querySelector('.read-more-content2');
+var readmoreCarot2 = document.querySelector('.read-more-carot2');
+
+readmore2.onclick = function() {
+  readmore2.classList.toggle('text-color-de320a');
+  readmoreContent2.classList.toggle('text-lg');
+  readmoreCarot2.classList.toggle('fa-caret-up');
+}

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home on Example</title>
+    <link>https://empower-title.netlify.com/</link>
+    <description>Recent content in Home on Example</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 24 Apr 2019 05:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://empower-title.netlify.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About Us</title>
+      <link>https://empower-title.netlify.com/about-us/</link>
+      <pubDate>Wed, 24 Apr 2019 05:00:00 +0000</pubDate>
+      
+      <guid>https://empower-title.netlify.com/about-us/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Examples of development elements</title>
+      <link>https://empower-title.netlify.com/devele/</link>
+      <pubDate>Wed, 24 Apr 2019 05:00:00 +0000</pubDate>
+      
+      <guid>https://empower-title.netlify.com/devele/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>INSERT PAGE TITLE HERE</title>
+      <link>https://empower-title.netlify.com/insert-url-here/</link>
+      <pubDate>Wed, 24 Apr 2019 05:00:00 +0000</pubDate>
+      
+      <guid>https://empower-title.netlify.com/insert-url-here/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Thank You</title>
+      <link>https://empower-title.netlify.com/thank-you/</link>
+      <pubDate>Wed, 24 Apr 2019 05:00:00 +0000</pubDate>
+      
+      <guid>https://empower-title.netlify.com/thank-you/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Title 101</title>
+      <link>https://empower-title.netlify.com/title-101/</link>
+      <pubDate>Wed, 24 Apr 2019 05:00:00 +0000</pubDate>
+      
+      <guid>https://empower-title.netlify.com/title-101/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Title Calculators</title>
+      <link>https://empower-title.netlify.com/title-calculator/</link>
+      <pubDate>Wed, 24 Apr 2019 05:00:00 +0000</pubDate>
+      
+      <guid>https://empower-title.netlify.com/title-calculator/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Underwriting</title>
+      <link>https://empower-title.netlify.com/underwriting/</link>
+      <pubDate>Wed, 24 Apr 2019 05:00:00 +0000</pubDate>
+      
+      <guid>https://empower-title.netlify.com/underwriting/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

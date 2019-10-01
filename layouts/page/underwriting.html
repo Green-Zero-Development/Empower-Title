@@ -1,8 +1,8 @@
 {{ define "main" }}
 
 <style>
-.about-us-hero {
-    background-image: url("https://picsum.photos/id/237/1200/1300");
+.underwriting-hero {
+    background-image: url("https://res.cloudinary.com/onpointcustomhomes/image/upload/v1569856109/Empower%20Title/Alliant-National-Logo.png");
 }
 .read-more-content {
     transition: .2s;
@@ -11,71 +11,12 @@
 
 <div class="bg-color-1B5785 py-1"></div>
 
-<div class="flex flex-wrap items-start py-12 lg:px-24">
-    <div class="w-5/6 lg:w-1/2 mx-auto pt-6 lg:pr-12">
-        <h2 class="text-4xl font-teko">Residential</h2>
-        <p class="font-open text-lg font-light pb-3">Buying or selling a home is, for most people, the largest financial endeavor they will ever undertake. You need to hand the professional services to a title company that efficiently and accurately handles this type of complex transaction.</p>
-        <div class="text-color-1B5785 select-none read-more">
-            <i class="pr-1 fas fa-caret-right read-more-carot"></i> Read More
-        </div>
-        <span class="font-open text-0 font-light read-more-content">
-        <p class="py-3">Frontier Title offers customers the most complete real estate services in the Katy and Houston areas. For title and escrow/closing services, you can count on Frontier Title for all your real estate needs. Frontier Title has always served its customers with accuracy and efficiency.</p>
-        <p class="pb-3">We work to remove any recorded hindrances that are inconsistent with the terms of the transaction. We offer traditional, fully-insured products, as well as leading-edge products and insurance policies in the refinance, second mortgage and equity markets. We respond quickly to individual cases with flexible, creative approaches to title insurance. We work closely with our affiliates to deliver a smooth home-buying experience, one that surpasses our customers’ expectations.</p>
-        </span>
-    </div>
-    <div class="w-5/6 lg:w-1/2 lg:px-8 mx-auto bg-cover bg-center bg-no-repeat about-us-hero">
-        <div class="py-40"></div>
-    </div>
+<h1 class="bg-color-1B5785 font-open text-4xl lg:text-5xl font-thin text-white text-center pt-6 pb-5 leading-none">Underwriting services</h1>
+
+<div class="w-5/6 lg:px-8 my-8 mx-auto bg-contain bg-center bg-no-repeat underwriting-hero">
+    <div class="py-8"></div>
 </div>
 
-<div class="flex flex-wrap lg:flex-row-reverse items-start pt-12 lg:px-24">
-    <div class="w-5/6 lg:w-1/2 mx-auto pt-6 lg:pl-12">
-        <h2 class="text-4xl font-teko">Commercial</h2>
-        <p class="font-open text-lg font-light pb-3">At Frontier Title, we understand that a commercial real estate closing is a complex and often intense matter. Our technology and adaptable, consistent approach to commercial title insurance transactions lets us deliver disciplined and original solutions in response to fluctuating markets.</p>
-        <div class="text-color-1B5785 select-none read-more">
-            <i class="pr-1 fas fa-caret-right read-more-carot"></i> Read More
-        </div>
-        <span class="font-open text-0 font-light read-more-content">
-        <p class="py-3">Frontier Title works hard to continually train our staff, providing them with the technology required to give the highest level of personal service. More importantly, we know nothing supercedes personal contact with our customers. We honestly value our customer relationships, and work to maintain them through consistent, responsive, and well-informed service. Our highly trained and experienced staff provides title insurance, escrow and settlement services specifically designed to support the individual demands of any commercial purchase.</p>
-        <p class="pb-3">Our clients know their closing transaction will exceed expectations. Frontier Title and our team of affiliates provide a comprehensive, single-source solution for our clients and their customers.</p>
-        <p class="pb-3">Frontier Title can anticipate the needs of each transaction and help you avoid unnecessary delays, expenses and issues at closing. We are committed to reducing your ultimate transaction costs and will be your advisers throughout the entire process. We’ll make sure you are provided with coverage that meets the needs of your transactions.</p>
-        </span>
-    </div>
-    <div class="w-5/6 lg:w-1/2 lg:px-8 mx-auto bg-cover bg-center bg-no-repeat about-us-hero">
-        <div class="py-40"></div>
-    </div>
-</div>
-
-<form class="flex flex-wrap mx-auto max-w-9xl p-8 lg:p-32" action="/thank-you/" netlify-honeypot="field-for-coolguys" name="" method="POST" netlify>
-    <input type="hidden" name="subject" value="New Submission from Website" />
-    <div class="flex flex-wrap w-full">
-        <h2 class="w-full text-4xl font-teko leading-none pb-4">Want to know more about us?</h2>
-        <p class="w-full font-open pb-8">Ask about our services or our company below</p>
-    </div>
-    <div class="flex flex-wrap w-full sm:w-1/2 xl:w-1/4 mx-auto pb-6">
-        <label class="w-full font-teko text-2xl">First Name*</label>
-        <input name="first-name" type="text" placeholder="e.g. John" class="w-full sm:w-11/12 font-open text-base border-4 p-2 focus:border-color-1B5785" required>
-    </div>
-    <div class="flex flex-wrap w-full sm:w-1/2 xl:w-1/4 mx-auto pb-6">
-        <label class="w-full font-teko text-2xl">Last Name*</label>
-        <input name="last-name" type="text" placeholder="e.g. Doe" class="w-full sm:w-11/12 font-open text-base border-4 p-2 focus:border-color-1B5785" required>
-    </div>
-    <div class="flex flex-wrap w-full sm:w-1/2 xl:w-1/4 mx-auto pb-6">
-        <label class="w-full font-teko text-2xl">Email*</label>
-        <input name="email" type="email" placeholder="e.g. johndoe@example.com" class="w-full sm:w-11/12 font-open text-base border-4 p-2 focus:border-color-1B5785" required>
-    </div>
-    <input type="text" name="field-for-coolguys" style="display:none" />
-    <div class="flex flex-wrap w-full sm:w-1/2 xl:w-1/4 mx-auto pb-6">
-        <label class="w-full font-teko text-2xl">Phone*</label>
-        <input name="phone" type="tel" placeholder="e.g. 555-867-5309" class="w-full sm:w-11/12 font-open text-base border-4 p-2 focus:border-color-1B5785" required>
-    </div>
-    <div class="flex flex-wrap w-full mx-auto pb-6">
-        <label class="w-full font-teko text-2xl">What can we help you with?*</label>
-        <textarea name="message" placeholder="Let us know what you need, e.g. ask about services, the company, or something else." class="h-32 w-full font-open text-base border-4 p-2 sm:mr-6 focus:border-color-1B5785" required></textarea>
-    </div>
-    <div class="flex flex-wrap w-full lg:w-auto">
-        <input type="submit" value="Ask about our services" class="w-full bg-color-1B5785 border-8 border-color-042947 hover:border-color-1B5785 font-teko text-xl lg:text-3xl text-white pt-2 pb-1 px-6">
-    </div>
-</form>
+{{ partial "global/contact-form.html" . }}
 
 {{ end }}
