@@ -1,11 +1,11 @@
-baseURL = "https://empower-title.netlify.com/"
+baseURL = "https://www.empowertitleco.com/"
 languageCode = "en-us"
 theme = "site-theme"
-title = "Example"
+title = "Empower Title"
 enableRobotsTXT = true
 
 [params.meta]
-description = "This domain is established to be used for illustrative examples in documents. You may use this domain in examples without prior coordination or asking for permission."
+description = "Website for Empower Title"
 
 [[menu.desktop]]
     identifier = "home"
@@ -82,7 +82,7 @@ description = "This domain is established to be used for illustrative examples i
     linkedin = ""
     pinterest = ""
 [params.publishingSettings]
-    siteinProduction = false
+    siteinProduction = true
 
 [mediaTypes]
   [mediaTypes."text/noExt"]
