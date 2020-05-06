@@ -5,30 +5,38 @@ fields:
 - type: datetime
   name: date
   label: date
+  hidden: true
 - type: text
   name: type
   label: type
+  hidden: true
 - type: text
   name: layout
   label: layout
+  hidden: true
 - type: text
   name: url
   label: url
+  hidden: true
 - type: text
   name: title
   label: title
+  hidden: true
 - type: text
   name: page_status
   label: page_status
+  hidden: true
 - type: text
   name: publish_image
   label: publish_image
+  hidden: true
 - type: text
   name: meta_description
-  label: meta_description
+  label: Meta Description
+  config:
+    required: true
 - type: field_group
   name: hero
-  label: hero
   fields:
   - type: text
     name: subtitle
@@ -39,9 +47,10 @@ fields:
   - type: file
     name: background_img
     label: background_img
+  label: Hero
 - type: field_group
   name: our_story_section
-  label: our_story_section
+  label: Our Story Section
   fields:
   - type: text
     name: title
@@ -49,19 +58,23 @@ fields:
   - type: textarea
     name: paragraph_text
     label: paragraph_text
+    config:
+      wysiwyg: true
+      schema:
+        format: html
   - type: file
     name: img
     label: img
 - type: field_group
   name: services_section
-  label: services_section
+  label: Services Section
   fields:
   - type: text
     name: title
     label: title
   - type: field_group
     name: title_101_button
-    label: title_101_button
+    label: Title 101 Button
     fields:
     - type: text
       name: button_text
@@ -71,7 +84,7 @@ fields:
       label: button_link
   - type: field_group
     name: underwriting_button
-    label: underwriting_button
+    label: Underwriting Button
     fields:
     - type: text
       name: button_text
@@ -81,7 +94,7 @@ fields:
       label: button_link
   - type: field_group
     name: title_calculator_button
-    label: title_calculator_button
+    label: Title Calculator Button
     fields:
     - type: text
       name: button_text
