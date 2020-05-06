@@ -4,26 +4,48 @@ hide_body: true
 fields:
 - type: text
   name: phone
-  label: phone
+  label: Phone Number
 - type: text
   name: fax
-  label: fax
+  label: Fax Number
 - type: field_group
   name: address
-  label: address
+  label: Address
   fields:
   - type: text
     name: city_serviced
-    label: city_serviced
-  - type: text
-    name: state_serviced
-    label: state_serviced
+    label: City Serviced
+  - name: state_serviced
+    type: select
+    default: []
+    config:
+      required: false
+      options:
+      - Texas
+      - Florida
+      - Georgia
+      - North Carolina
+      - South Carolina
+      - Kentucky
+      - Virginia
+      - Alabama
+      - Mississippi
+      - Louisiana
+      - Oklahoma
+      - Tennessee
+      - Arkansas
+      source:
+        type: simple
+        section: 
+        file: 
+        path: 
+    label: State Serviced
   - type: text
     name: street
-    label: street
+    label: Street
   - type: text
     name: city_office_location
-    label: city_office_location
+    label: Office Location (city)
   - type: text
     name: zip_office
-    label: zip_office
+    label: Zip Code for Office
