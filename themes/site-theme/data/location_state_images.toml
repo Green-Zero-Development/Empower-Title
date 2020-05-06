@@ -6,3 +6,47 @@ img = "https://res.cloudinary.com/onpointcustomhomes/image/upload/v1588702054/Em
 name = "Texas"
 appr = "TX"
 img = "https://res.cloudinary.com/onpointcustomhomes/image/upload/v1588702047/Empower%20Title/texas-location.png"
+[[state]]
+name = "Alabama"
+appr = "AL"
+img = "https://res.cloudinary.com/onpointcustomhomes/image/upload/v1588797811/Empower%20Title/Alabama_location.png"
+[[state]]
+name = "Arkansas"
+appr = "AR"
+img = "https://res.cloudinary.com/onpointcustomhomes/image/upload/v1588797892/Empower%20Title/Arkansas_location.png"
+[[state]]
+name = "Georgia"
+appr = "GA"
+img = "https://res.cloudinary.com/onpointcustomhomes/image/upload/v1588797963/Empower%20Title/Georgia_location.png"
+[[state]]
+name = "Kentucky"
+appr = "KY"
+img = "https://res.cloudinary.com/onpointcustomhomes/image/upload/v1588798057/Empower%20Title/Kentucky_location.png"
+[[state]]
+name = "Louisiana"
+appr = "LA"
+img = "https://res.cloudinary.com/onpointcustomhomes/image/upload/v1588798149/Empower%20Title/Louisiana_location.png"
+[[state]]
+name = "Mississippi"
+appr = "MS"
+img = "https://res.cloudinary.com/onpointcustomhomes/image/upload/v1588798231/Empower%20Title/Mississippi_location.png"
+[[state]]
+name = "North Carolina"
+appr = "NC"
+img = "https://res.cloudinary.com/onpointcustomhomes/image/upload/v1588798307/Empower%20Title/North_Carolina_location.png"
+[[state]]
+name = "Oklahoma"
+appr = "OK"
+img = "https://res.cloudinary.com/onpointcustomhomes/image/upload/v1588798375/Empower%20Title/Oklahoma_location.png"
+[[state]]
+name = "South Carolina"
+appr = "SC"
+img = "https://res.cloudinary.com/onpointcustomhomes/image/upload/v1588798435/Empower%20Title/South_Carolina_location.png"
+[[state]]
+name = "Tennessee"
+appr = "TN"
+img = "https://res.cloudinary.com/onpointcustomhomes/image/upload/v1588798491/Empower%20Title/Tennessee_location.png"
+[[state]]
+name = "Virginia"
+appr = "VA"
+img = "https://res.cloudinary.com/onpointcustomhomes/image/upload/v1588798551/Empower%20Title/Virginia_location.png"
