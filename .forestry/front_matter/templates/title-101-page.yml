@@ -1,0 +1,139 @@
+---
+label: Title 101 Page
+hide_body: true
+fields:
+- type: datetime
+  name: date
+  label: date
+- type: text
+  name: type
+  label: type
+- type: text
+  name: layout
+  label: layout
+- type: text
+  name: url
+  label: url
+- type: text
+  name: title
+  label: title
+- type: text
+  name: page_status
+  label: page_status
+- type: text
+  name: publish_image
+  label: publish_image
+- type: text
+  name: meta_description
+  label: meta_description
+- type: text
+  name: topbar_title
+  label: topbar_title
+- type: field_group
+  name: hero
+  label: hero
+  fields:
+  - type: text
+    name: title
+    label: title
+  - type: textarea
+    name: paragraph_text
+    label: paragraph_text
+  - type: file
+    name: img
+    label: img
+- type: field_group
+  name: schedule_list_section
+  label: schedule_list_section
+  fields:
+  - type: text
+    name: title
+    label: title
+  - type: field_group
+    name: schedule_A
+    label: schedule_A
+    fields:
+    - type: text
+      name: title
+      label: title
+    - type: text
+      name: subtitle
+      label: subtitle
+    - type: list
+      name: list_items
+      label: list_items
+  - type: field_group
+    name: schedule_B
+    label: schedule_B
+    fields:
+    - type: text
+      name: title
+      label: title
+    - type: text
+      name: subtitle
+      label: subtitle
+    - type: list
+      name: list_items
+      label: list_items
+  - type: field_group
+    name: schedule_C
+    label: schedule_C
+    fields:
+    - type: text
+      name: title
+      label: title
+    - type: text
+      name: subtitle
+      label: subtitle
+    - type: list
+      name: list_items
+      label: list_items
+  - type: field_group
+    name: schedule_D
+    label: schedule_D
+    fields:
+    - type: text
+      name: title
+      label: title
+    - type: text
+      name: subtitle
+      label: subtitle
+    - type: list
+      name: list_items
+      label: list_items
+- type: field_group
+  name: who_pays_what_section
+  label: who_pays_what_section
+  fields:
+  - type: text
+    name: title
+    label: title
+  - type: text
+    name: subtitle
+    label: subtitle
+  - type: field_group
+    name: seller_list
+    label: seller_list
+    fields:
+    - type: text
+      name: title
+      label: title
+    - type: text
+      name: subtitle
+      label: subtitle
+    - type: list
+      name: list_items
+      label: list_items
+  - type: field_group
+    name: buyer_list
+    label: buyer_list
+    fields:
+    - type: text
+      name: title
+      label: title
+    - type: text
+      name: subtitle
+      label: subtitle
+    - type: list
+      name: list_items
+      label: list_items
