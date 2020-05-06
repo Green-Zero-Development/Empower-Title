@@ -1,38 +1,32 @@
 {{ define "main" }}
 
+<h1 class="bg-color-1B5785 font-open text-4xl lg:text-5xl font-thin text-white text-center pt-6 pb-5 leading-none">{{ .Params.topbar_title }}</h1>
+
 <style>
-.underwriting-hero {
-    background-image: url("https://res.cloudinary.com/onpointcustomhomes/image/upload/v1569856109/Empower%20Title/Alliant-National-Logo.png");
-}
-.residential-underwriting {
-    background-image: url("https://res.cloudinary.com/onpointcustomhomes/image/upload/v1569948512/Empower%20Title/residential-underwriting.jpg");
-}
-.commercial-underwriting {
-    background-image: url("https://res.cloudinary.com/onpointcustomhomes/image/upload/v1569948504/Empower%20Title/commercial-underwriting.jpg");
-}
-.read-more-content {
-    transition: .2s;
-}
+    .underwriting-hero {
+        background-image: url("{{ .Site.Params.tracking.cloudinary_url }}{{ .Params.partner_logo }}");
+    }
 </style>
-
-<h1 class="bg-color-1B5785 font-open text-4xl lg:text-5xl font-thin text-white text-center pt-6 pb-5 leading-none">Underwriting services</h1>
-
 <div class="w-5/6 lg:px-8 my-8 mx-auto bg-contain bg-center bg-no-repeat underwriting-hero">
     <div class="py-8"></div>
 </div>
 
 <div class="flex flex-wrap items-start py-12 lg:px-24">
     <div class="w-5/6 lg:w-1/2 mx-auto pt-6 lg:pr-12">
-        <h2 class="text-4xl font-teko">Residential</h2>
-        <p class="font-open text-lg font-light pb-3">Buying or selling a home is, for most people, the largest financial endeavor they will ever undertake. You need to hand the professional services to a title company that efficiently and accurately handles this type of complex transaction.</p>
+        <h2 class="text-4xl font-teko">{{ .Params.residential_section.title }}</h2>
+        <p class="font-open text-lg font-light pb-3">{{ .Params.residential_section.paragraph_text | safeHTML }}</p>
         <div class="text-color-1B5785 select-none read-more">
             <i class="pr-1 fas fa-caret-right read-more-carot"></i> Read More
         </div>
         <span class="font-open text-0 font-light read-more-content">
-        <p class="py-3">Empower Title offers customers the most complete real estate services in the Katy and Houston areas. For title and escrow/closing services, you can count on Empower Title for all your real estate needs. Empower Title has always served its customers with accuracy and efficiency.</p>
-        <p class="pb-3">We work to remove any recorded hindrances that are inconsistent with the terms of the transaction. We offer traditional, fully-insured products, as well as leading-edge products and insurance policies in the refinance, second mortgage and equity markets. We respond quickly to individual cases with flexible, creative approaches to title insurance. We work closely with our affiliates to deliver a smooth home-buying experience, one that surpasses our customers’ expectations.</p>
+        <p class="py-3">{{ .Params.residential_section.read_more_text | safeHTML }}</p>
         </span>
     </div>
+    <style>
+        .residential-underwriting {
+            background-image: url("{{ .Site.Params.tracking.cloudinary_url }}{{ .Params.residential_section.img }}");
+        }
+    </style>
     <div class="w-5/6 lg:w-1/2 lg:px-8 mx-auto bg-contain bg-center bg-no-repeat residential-underwriting">
         <div class="py-32"></div>
     </div>
@@ -40,17 +34,20 @@
 
 <div class="flex flex-wrap lg:flex-row-reverse items-start pt-12 pb-24 lg:px-24">
     <div class="w-5/6 lg:w-1/2 mx-auto pt-6 lg:pr-12">
-        <h2 class="text-4xl font-teko">Commercial</h2>
-        <p class="font-open text-lg font-light pb-3">At Empower Title, we understand that a commercial real estate closing is a complex and often intense matter. Our technology and adaptable, consistent approach to commercial title insurance transactions lets us deliver disciplined and original solutions in response to fluctuating markets.</p>
+        <h2 class="text-4xl font-teko">{{ .Params.commercial_section.title }}</h2>
+        <p class="font-open text-lg font-light pb-3">{{ .Params.commercial_section.paragraph_text | safeHTML }}</p>
         <div class="text-color-1B5785 select-none read-more2">
             <i class="pr-1 fas fa-caret-right read-more-carot2"></i> Read More
         </div>
         <span class="font-open text-0 font-light read-more-content2">
-        <p class="py-3">Empower Title works hard to continually train our staff, providing them with the technology required to give the highest level of personal service. More importantly, we know nothing supercedes personal contact with our customers. We honestly value our customer relationships, and work to maintain them through consistent, responsive, and well-informed service. Our highly trained and experienced staff provides title insurance, escrow and settlement services specifically designed to support the individual demands of any commercial purchase.</p>
-        <p class="pb-3">Our clients know their closing transaction will exceed expectations. Empower Title and our team of affiliates provide a comprehensive, single-source solution for our clients and their customers.</p>
-        <p class="pb-3">Empower Title can anticipate the needs of each transaction and help you avoid unnecessary delays, expenses and issues at closing. We are committed to reducing your ultimate transaction costs and will be your advisers throughout the entire process. We’ll make sure you are provided with coverage that meets the needs of your transactions.</p>
+        <p class="py-3">{{ .Params.commercial_section.read_more_text | safeHTML }}</p>
         </span>
     </div>
+    <style>
+        .commercial-underwriting {
+            background-image: url("{{ .Site.Params.tracking.cloudinary_url }}{{ .Params.commercial_section.img }}");
+        }
+    </style>
     <div class="w-5/6 lg:w-1/2 lg:px-8 mx-auto bg-contain bg-center bg-no-repeat commercial-underwriting">
         <div class="py-32"></div>
     </div>
