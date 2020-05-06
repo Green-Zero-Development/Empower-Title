@@ -1,12 +1,6 @@
 {{ define "main" }}
 
 <style>
-.home-hero {
-    background-image: url("https://res.cloudinary.com/onpointcustomhomes/image/upload/b_black,o_50/v1566605000/Empower%20Title/home-hero.jpg");
-}
-.about-us-hero {
-    background-image: url("https://res.cloudinary.com/onpointcustomhomes/image/upload/v1569855346/Empower%20Title/about-empower.jpg");
-}
 a {
 transition: .2s;
 }
@@ -14,17 +8,22 @@ transition: .2s;
 
 <div class="bg-color-1B5785 py-1"></div>
 
+<style>
+.home-hero {
+    background-image: url("{{ .Site.Params.tracking.cloudinary_url }}/b_black,o_50{{ .Params.hero.background_img }}");
+}
+</style>
 <div class="bg-fixed bg-bottom bg-cover bg-no-repeat z-50 text-center pt-32 pb-40 px-6 lg:px-12 home-hero">
-    <h6 class="font-teko text-2xl md:text-4xl font-light text-white leading-none pb-3">Welcome to</h6>
-    <h1 class="font-open text-3xl md:text-6xl font-light text-white pb-10 leading-none">Empower Title</h1>
+    <h6 class="font-teko text-2xl md:text-4xl font-light text-white leading-none pb-3">{{ .Params.hero.subtitle }}</h6>
+    <h1 class="font-open text-3xl md:text-6xl font-light text-white pb-10 leading-none">{{ .Params.hero.title }}</h1>
 </div>
 
 <div class="bg-color-1B5785 py-1"></div>
 
 <div class="flex flex-wrap items-start bg-white lg:pl-16 lg:mx-24 -mt-24 shadow-lg">
     <div class="w-5/6 lg:w-2/3 mx-auto pt-10 lg:pr-12">
-        <h2 class="text-4xl font-teko">Our Story</h2>
-        <p class="font-open text-lg font-light pb-3">Texas has a long history, and with it, a long chain of title on most of the property in the state. With a rich pioneer tradition and enterprising spirit, real estate transactions in the state of Texas have a considerable need for research and coverage on property purchases. This market has an unprecedented demand for strong, solvent title insurance companies.</p>
+        <h2 class="text-4xl font-teko">{{ .Params.our_story_section.title }}</h2>
+        <p class="font-open text-lg font-light pb-3">{{ .Params.our_story_section.paragraph_text | safeHTML }}</p>
         <!-- <div class="text-color-1B5785 select-none read-more">
             <i class="pr-1 fas fa-caret-right read-more-carot"></i> Read More
         </div>
@@ -34,6 +33,11 @@ transition: .2s;
         <p class="pb-10">With our unique, customer-oriented philosophies, Frontier Title has solid plans for expanding to serve the entire Texas market.</p>
         </span> -->
     </div>
+    <style>
+        .about-us-hero {
+            background-image: url("{{ .Site.Params.tracking.cloudinary_url }}{{ .Params.our_story_section.img }}");
+        }
+    </style>
     <div class="w-5/6 lg:w-1/3 lg:px-8 mx-auto bg-cover bg-center bg-no-repeat about-us-hero">
         <div class="py-40"></div>
     </div>
@@ -41,16 +45,16 @@ transition: .2s;
 
 <div class="flex flex-wrap items-center py-12 lg:px-32">
     <div class="w-full mb-12">
-        <h2 class="font-open text-5xl lg:text-6xl text-color-1B5785 font-thin text-center">Services</h2>
+        <h2 class="font-open text-5xl lg:text-6xl text-color-1B5785 font-thin text-center">{{ .Params.services_section.title }}</h2>
     </div>
-    <a href="/title-101/" class="w-full lg:w-1/2 bg-gray-200 hover:bg-color-1B5785 text-color-1B5785 hover:text-white pt-8 pb-6 text-center border-8 border-white">
-        <h3 class="font-teko text-4xl font-thin">Title 101</h3>
+    <a href="{{ .Params.services_section.title_101_button.button_link }}" class="w-full lg:w-1/2 bg-gray-200 hover:bg-color-1B5785 text-color-1B5785 hover:text-white pt-8 pb-6 text-center border-8 border-white">
+        <h3 class="font-teko text-4xl font-thin">{{ .Params.services_section.title_101_button.button_text }}</h3>
     </a>
-    <a href="/underwriting/" class="w-full lg:w-1/2 bg-gray-200 hover:bg-color-1B5785 text-color-1B5785 hover:text-white pt-8 pb-6 text-center border-8 border-white">
-        <h3 class="font-teko text-4xl font-thin">Underwriting</h3>
+    <a href="{{ .Params.services_section.underwriting_button.button_link }}" class="w-full lg:w-1/2 bg-gray-200 hover:bg-color-1B5785 text-color-1B5785 hover:text-white pt-8 pb-6 text-center border-8 border-white">
+        <h3 class="font-teko text-4xl font-thin">{{ .Params.services_section.underwriting_button.button_text }}</h3>
     </a>
-    <a href="/title-calculator/#new-purchase-calculator" class="w-full bg-gray-200 hover:bg-color-1B5785 text-color-1B5785 hover:text-white pt-8 pb-6 text-center border-8 border-white">
-        <h3 class="font-teko text-4xl font-thin">Title Calculators</h3>
+    <a href="{{ .Params.services_section.title_calculator_button.button_link }}" class="w-full bg-gray-200 hover:bg-color-1B5785 text-color-1B5785 hover:text-white pt-8 pb-6 text-center border-8 border-white">
+        <h3 class="font-teko text-4xl font-thin">{{ .Params.services_section.title_calculator_button.button_text }}</h3>
     </a>
 </div>
 

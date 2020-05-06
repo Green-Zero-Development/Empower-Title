@@ -65,7 +65,7 @@ enableRobotsTXT = true
     url = "/contact-us/"
     weight = 6
 [params.tracking]
-    cloudinaryUrl = "https://res.cloudinary.com/onpointcustomhomes/image/upload"
+    cloudinary_url = "https://res.cloudinary.com/onpointcustomhomes/image/upload"
 [params.socialLinks]
     facebook = ""
     insta = ""
