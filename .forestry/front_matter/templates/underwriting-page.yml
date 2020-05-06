@@ -5,36 +5,43 @@ fields:
 - type: datetime
   name: date
   label: date
+  hidden: true
 - type: text
   name: type
   label: type
+  hidden: true
 - type: text
   name: layout
   label: layout
+  hidden: true
 - type: text
   name: url
   label: url
+  hidden: true
 - type: text
   name: title
   label: title
+  hidden: true
 - type: text
   name: page_status
   label: page_status
+  hidden: true
 - type: text
   name: publish_image
   label: publish_image
+  hidden: true
 - type: text
   name: meta_description
-  label: meta_description
+  label: Meta Description
 - type: text
   name: topbar_title
-  label: topbar_title
+  label: Topbar Title
 - type: file
   name: partner_logo
-  label: partner_logo
+  label: Partner Logo
 - type: field_group
   name: residential_section
-  label: residential_section
+  label: Residential Section
   fields:
   - type: text
     name: title
@@ -42,15 +49,23 @@ fields:
   - type: textarea
     name: paragraph_text
     label: paragraph_text
+    config:
+      wysiwyg: true
+      schema:
+        format: html
   - type: textarea
     name: read_more_text
     label: read_more_text
+    config:
+      wysiwyg: true
+      schema:
+        format: html
   - type: file
     name: img
     label: img
 - type: field_group
   name: commercial_section
-  label: commercial_section
+  label: Commercial Section
   fields:
   - type: text
     name: title
@@ -58,9 +73,17 @@ fields:
   - type: textarea
     name: paragraph_text
     label: paragraph_text
+    config:
+      wysiwyg: true
+      schema:
+        format: html
   - type: textarea
     name: read_more_text
     label: read_more_text
+    config:
+      wysiwyg: true
+      schema:
+        format: html
   - type: file
     name: img
     label: img
