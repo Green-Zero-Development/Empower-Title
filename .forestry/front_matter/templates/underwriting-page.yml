@@ -1,0 +1,66 @@
+---
+label: Underwriting Page
+hide_body: true
+fields:
+- type: datetime
+  name: date
+  label: date
+- type: text
+  name: type
+  label: type
+- type: text
+  name: layout
+  label: layout
+- type: text
+  name: url
+  label: url
+- type: text
+  name: title
+  label: title
+- type: text
+  name: page_status
+  label: page_status
+- type: text
+  name: publish_image
+  label: publish_image
+- type: text
+  name: meta_description
+  label: meta_description
+- type: text
+  name: topbar_title
+  label: topbar_title
+- type: file
+  name: partner_logo
+  label: partner_logo
+- type: field_group
+  name: residential_section
+  label: residential_section
+  fields:
+  - type: text
+    name: title
+    label: title
+  - type: textarea
+    name: paragraph_text
+    label: paragraph_text
+  - type: textarea
+    name: read_more_text
+    label: read_more_text
+  - type: file
+    name: img
+    label: img
+- type: field_group
+  name: commercial_section
+  label: commercial_section
+  fields:
+  - type: text
+    name: title
+    label: title
+  - type: textarea
+    name: paragraph_text
+    label: paragraph_text
+  - type: textarea
+    name: read_more_text
+    label: read_more_text
+  - type: file
+    name: img
+    label: img
