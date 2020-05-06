@@ -1,0 +1,29 @@
+---
+label: Location (Single)
+hide_body: true
+fields:
+- type: text
+  name: phone
+  label: phone
+- type: text
+  name: fax
+  label: fax
+- type: field_group
+  name: address
+  label: address
+  fields:
+  - type: text
+    name: city_serviced
+    label: city_serviced
+  - type: text
+    name: state_serviced
+    label: state_serviced
+  - type: text
+    name: street
+    label: street
+  - type: text
+    name: city_office_location
+    label: city_office_location
+  - type: text
+    name: zip_office
+    label: zip_office
