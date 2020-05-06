@@ -10,3 +10,9 @@ HUGO_ENABLEGITINFO = "true"
 
 [context.deploy-preview.environment]
 HUGO_VERSION = "0.55.0"
+
+[[redirects]]
+  from = "https://empower-title.netlify.app/*"
+  to = "https://www.empowertitleco.com/:splat"
+  status = 301
+  force = true

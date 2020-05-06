@@ -1,0 +1,22 @@
+[meta]
+description = "Title insurance underwriting services in Houston Texas and Tampa Florida."
+[contact_numbers]
+phone = "346.386.0800"
+fax = "346.386.0801"
+[logos]
+dark_logo = "/pageimg/example-logo.png"
+logo = "https://res.cloudinary.com/onpointcustomhomes/image/upload/v1566604761/Empower%20Title/Empower_Logo.jpg"
+mobile_logo = "https://res.cloudinary.com/onpointcustomhomes/image/upload/v1566604761/Empower%20Title/Empower_Logo.jpg"
+[address]
+city = "The Woodlands"
+state = "TX"
+street = "1450 Lake Robbins Drive, Ste 300"
+zip = "77380"
+[email]
+primary = "info@empowertitleco.com"
+[tracking]
+google_analytics = ""
+[social]
+facebook = ""
+insta = ""
+youtube = ""

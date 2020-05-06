@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<sitemap>
-	   	<loc>https://empower-title.netlify.com/sitepages.xml</loc>
+	   	<loc>https://www.empowertitleco.com/sitepages.xml</loc>
 	   	<lastmod>2019-04-23T15:04:05-07:00</lastmod>
 	</sitemap>
 	<sitemap>
-	   	<loc>https://empower-title.netlify.com/siteposts.xml</loc>
+	   	<loc>https://www.empowertitleco.com/siteposts.xml</loc>
 	   	<lastmod>2019-04-23T15:04:05-07:00</lastmod>
 	</sitemap>
 </sitemapindex>

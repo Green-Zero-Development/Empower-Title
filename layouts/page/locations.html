@@ -1,0 +1,53 @@
+{{ define "main" }}
+
+<style>
+.title-hero-1 {
+    background-image: url("https://res.cloudinary.com/onpointcustomhomes/image/upload/v1569898038/Empower%20Title/learn-about-title.jpg");
+}
+.title-hero-2 {
+    background-image: url("https://res.cloudinary.com/onpointcustomhomes/image/upload/v1569898031/Empower%20Title/study-title.jpg");
+}
+.read-more-content {
+    transition: .2s;
+}
+.read-more-content2 {
+    transition: .2s;
+}
+</style>
+
+<h1 class="bg-color-1B5785 font-open text-4xl lg:text-5xl font-thin text-white text-center pt-6 pb-5 leading-none">Locations</h1>
+
+<div class="flex flex-wrap items-start pt-12">
+    {{ range where .Site.Pages "Type" "locations" }}
+    {{ $mdstate := .Params.address.state_serviced }}
+    <div class="flex flex-wrap w-11/12 lg:w-1/2 mx-auto lg:px-12">
+        <div class="flex flex-wrap w-full bg-gray-200 mx-auto mb-8 p-8 shadow-lg">
+            <div class="w-full sm:w-2/3 xl:w-1/2">
+                <h4 class="font-teko text-4xl leading-none">{{ .Params.address.city_serviced }}, {{ .Params.address.state_serviced }}</h4>
+                <p class="font-open text-base">{{ .Params.address.street }}</p>
+                <p class="font-open text-base pb-8">{{ .Params.address.city_office_location }} {{ range .Site.Data.location_state_images.state }}{{ if eq $mdstate .name }}{{ .appr }}{{ end }}{{ end }}, {{ .Params.address.zip_office }}</p>
+                <div class="flex pb-4">
+                    <i class="text-2xl text-color-1B5785 z-10 fas fa-phone-square"></i>
+                    <p class="pl-2 font-open text-base">{{ .Params.phone }}</p>
+                </div>
+                <div class="flex">
+                    <i class="text-2xl text-color-1B5785 z-10 fas fa-fax"></i>
+                    <p class="pl-2 font-open text-base">{{ .Params.fax }}</p>
+                </div>
+            </div>
+            <div class="w-full sm:w-1/3 xl:w-1/2">
+                {{ range .Site.Data.location_state_images.state }}
+                    {{ if eq $mdstate .name }}
+                        <img class="mt-8 sm:mt-0 p-3" src="{{ .img }}">
+                    {{ end }}
+                {{ end }}
+            </div>
+            <a href="tel:{{ .Params.phone }}" class="w-full xl:w-auto bg-color-1B5785 border-4 border-color-042947 hover:bg-color-042947 font-teko text-2xl text-white text-center mt-8 pt-2 pb-1 px-4 hover:cursor-pointer">
+                Call Now
+            </a>
+        </div>
+    </div>
+    {{ end }}
+</div>
+
+{{ end }}

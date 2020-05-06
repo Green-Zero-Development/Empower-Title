@@ -4,77 +4,67 @@ theme = "site-theme"
 title = "Empower Title"
 enableRobotsTXT = true
 
-[params.meta]
-description = "Website for Empower Title"
-
 [[menu.desktop]]
-    identifier = "home"
+    identifier = "Home"
     name = "Home"
     url = "/"
     weight = 1
 [[menu.desktop]]
-    identifier = "title-101"
+    identifier = "Title 101"
     name = "Title 101"
     url = "/title-101/"
     weight = 2
 [[menu.desktop]]
-    identifier = "underwriting"
+    identifier = "Underwriting"
     name = "Underwriting"
     url = "/underwriting/"
     weight = 3
 [[menu.desktop]]
-    identifier = "title-calculator"
+    identifier = "Title Calculators"
     name = "Title Calculators"
     url = "/title-calculator/"
     weight = 4
 [[menu.desktop]]
-    identifier = "contact-us"
+    identifier = "Locations"
+    name = "Locations"
+    url = "/locations/"
+    weight = 5
+[[menu.desktop]]
+    identifier = "Contact Us"
     name = "Contact Us"
     url = "/contact-us/"
-    weight = 5
+    weight = 6
 [[menu.mobile]]
-    identifier = "home"
+    identifier = "Home"
     name = "Home"
     url = "/"
     weight = 1
 [[menu.mobile]]
-    identifier = "title-101"
+    identifier = "Title 101"
     name = "Title 101"
     url = "/title-101/"
     weight = 2
 [[menu.mobile]]
-    identifier = "underwriting"
+    identifier = "Underwriting"
     name = "Underwriting"
     url = "/underwriting/"
     weight = 3
 [[menu.mobile]]
-    identifier = "title-calculator"
+    identifier = "Title Calculators"
     name = "Title Calculators"
     url = "/title-calculator/"
     weight = 4
 [[menu.mobile]]
-    identifier = "contact-us"
+    identifier = "Locations"
+    name = "Locations"
+    url = "/locations/"
+    weight = 5
+[[menu.mobile]]
+    identifier = "Contact Us"
     name = "Contact Us"
     url = "/contact-us/"
-    weight = 5
-[params.contactNumbers]
-    Fax = "555.555.5555"
-    Phone = "555.555.5555"
-[params.Logos]
-    darkLogo = "/pageimg/example-logo.png"
-    logo = "https://res.cloudinary.com/onpointcustomhomes/image/upload/v1566604761/Empower%20Title/Empower_Logo.jpg"
-    mobileLogo = "https://res.cloudinary.com/onpointcustomhomes/image/upload/v1566604761/Empower%20Title/Empower_Logo.jpg"
-[params.utilityImages]
-    thankyouBackground = "/pageimg/thank-you-contact.jpg"
-[params.address]
-    city = "Statesboro"
-    state = "GA"
-    street = "P.O. Box 134"
-    zip = 30459
-[params.email]
-    email = "example@example.com"
+    weight = 6
 [params.tracking]
-    googleAnalytics = ""
     cloudinaryUrl = "https://res.cloudinary.com/onpointcustomhomes/image/upload"
 [params.socialLinks]
     facebook = ""
@@ -82,7 +72,7 @@ description = "Website for Empower Title"
     linkedin = ""
     pinterest = ""
 [params.publishingSettings]
-    siteinProduction = true
+    site_in_production = true
 
 [mediaTypes]
   [mediaTypes."text/noExt"]
@@ -107,26 +97,16 @@ description = "Website for Empower Title"
         isPlainText = false
         mediaType = "application/xml"
         path = "/"
-    [outputFormats.redirects]
-        baseName = "_redirects"
-        isPlainText = true
-        mediaType = "text/noExt"
-        path = "/"
-    [outputFormats.Algolia]
-        baseName = "algolia"
-        isPlainText = true
-        mediaType = "application/json"
-        notAlternative = true
 
 [outputs]
-  home = ["HTML", "sitemapindex", "sitepages", "siteposts", "RSS", "redirects", "Algolia"]
+  home = ["HTML", "sitemapindex", "sitepages", "siteposts", "RSS"]
 
 [params.algolia]
     appId = ""
     searchKey = ""
     indexName = ""
 
-[params.extraTools]
-    algoliaSearch = false
-    fontAwesome = true
-    floatingHeader = false
+[params.extra_tools]
+    algolia_search = false
+    font_awesome = true
+    floating_header = false

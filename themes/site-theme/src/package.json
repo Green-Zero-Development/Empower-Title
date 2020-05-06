@@ -34,9 +34,9 @@
     "eventemitter3": "^3.1.0",
     "micromodal": "^0.4.0",
     "mini-css-extract-plugin": "^0.4.5",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.14.1",
     "scrollreveal": "^4.0.5",
     "tiny-slider": "^2.9.2",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.3.11"
   }
 }

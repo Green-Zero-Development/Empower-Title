@@ -4,8 +4,8 @@ type = "page"
 layout = "thankYou"
 url = "/thank-you/"
 title = "Thank You"
-page-status = "thank-you"
+page_status = "thank-you"
 publish_image = "INPUT URL TO PHOTO THAT DESCRIBES THE PAGE"
-metaDescription = "Thank you - we will be in touch soon."
-robotsdisallow = "true"
+meta_description = "Thank you - we will be in touch soon."
+robotsdisallow = true
 +++

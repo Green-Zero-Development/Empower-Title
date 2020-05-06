@@ -1,5 +1,5 @@
 var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var webpack = require('webpack');
 var AssetsPlugin = require('assets-webpack-plugin');
 var tailwindcss = require('tailwindcss');
@@ -22,10 +22,18 @@ module.exports = {
 			},
 			{
 				test: /\.css$/,
-				use: ExtractTextPlugin.extract({
-					fallback: 'style-loader',
-					use: 'css-loader?importLoaders=1!postcss-loader'
-				})
+				use: [
+					MiniCssExtractPlugin.loader,
+					{
+						loader: 'css-loader',
+						options: {
+						importLoaders: 1,
+						}
+					},
+					{
+						loader: 'postcss-loader',
+					}
+					]
 			}
 		]
 	},
@@ -45,11 +53,11 @@ module.exports = {
 			path: path.join(__dirname, '../data'),
 			prettyPrint: true
 		}),
-		new ExtractTextPlugin({
-			filename: getPath => {
-				return getPath('css/[name].[chunkhash].css');
-			},
-			allChunks: true
-		})
+		new MiniCssExtractPlugin({
+      		filename: 'css/[name].[chunkhash].css',
+		}),
+		new MiniCssExtractPlugin({
+      		filename: 'css/inline.css',
+    	})
 	],
 };

@@ -3,5 +3,9 @@ User-agent: *
 Disallow: /
 
 
+Disallow: /thank-you/
 
-Sitemap: https://empower-title.netlify.com/sitemapindex.xml
+Disallow: /locations/
+
+
+Sitemap: https://www.empowertitleco.com/sitemapindex.xml

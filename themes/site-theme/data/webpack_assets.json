@@ -1,6 +1,9 @@
 {
   "app": {
-    "js": "js/app.0bb6153a2152def95688.js",
-    "css": "css/app.0bb6153a2152def95688.css"
+    "css": [
+      "css/app.4e6dbf813c807a15da51.css",
+      "css/inline.css"
+    ],
+    "js": "js/app.4e6dbf813c807a15da51.js"
   }
 }

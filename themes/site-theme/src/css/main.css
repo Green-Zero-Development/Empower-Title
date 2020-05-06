@@ -7,11 +7,6 @@
 
 .mobile-menu-toggle {z-index: 999!important;opacity: 1.0!important;}.desktop-menu {display:none;}@media screen and (min-width:992px) {.mobile-menu-button {display: none;}.desktop-menu {display:block;}}
 
-.body-wrapper {
-  max-width: 1920px;
-  margin: auto;
-}
-
 .mobile-menu {
   z-index: -999;
   opacity: 0;
@@ -29,10 +24,7 @@
   border-color: transparent;
 }
 
-/* default backgrounds */
-
-#thank-you {
-  background-image: url("{{ .Site.Params.utilityImages.thankyouBackground }}");
-  background-size: auto;
-  background-repeat: no-repeat;
+.laz-img {
+  background-image: none !important;
+  background-color: #EFEEEB;
 }

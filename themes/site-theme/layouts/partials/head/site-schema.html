@@ -1,0 +1,78 @@
+{{ if .IsHome -}}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "url": "{{ .Site.BaseURL }}",
+  {{ if .Site.Author.name -}}
+  "author": {
+    "@type": "Organization",
+    "name": "{{ .Site.Author.name }}"
+  },
+  {{- end }}
+  {{ if .Site.Params.description -}}
+  "description": "{{ .Params.meta_description }}",
+  {{- end }}
+  {{ with .Site.Params.image -}}
+  "image": "{{ .url | absURL }}",
+  {{- end }}
+  "thumbnailUrl": "{{ if .Site.Params.tracking.cloudinaryURL }}{{ .Site.Params.tracking.cloudinaryURL }}{{ else }}{{ .Site.BaseURL }}{{ end }}{{ .Site.Params.logos.logo }}",
+  "name": "{{ .Site.Title }}"
+}
+</script>
+{{/*
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "http://example.com/search?&q={query}",
+    "query-input": "required"
+  } */}}
+{{- else if .IsPage -}}
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "WebPage",
+  "headline": "{{ .Title }}",
+  "description": {{ .Params.meta_description }},
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ .Permalink }}"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "{{ if .Site.Params.tracking.cloudinaryURL }}{{ .Site.Params.tracking.cloudinaryURL }}{{ else }}{{ .Site.BaseURL }}{{ end }}{{ .Param "publish_image" }}"
+  },
+  "genre": "{{ .Type }}",
+  {{ with .Params.tags -}}
+  "keywords": "{{ delimit . ", " }}",
+  {{- end }}
+  "url": "{{ .Permalink }}",
+  {{ if not .PublishDate.IsZero -}}
+  "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05" | safeHTML }}",
+  {{- else if not .Date.IsZero -}}
+  "datePublished": "{{ .Date.Format "2006-01-02T15:04:05" | safeHTML }}",
+  {{- end }}
+  {{ with .Lastmod -}}
+  "dateModified": "{{ .Format "2006-01-02T15:04:05" | safeHTML }}",
+  {{- end }}
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ .Site.Title }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ if .Site.Params.tracking.cloudinaryURL }}{{ .Site.Params.tracking.cloudinaryURL }}{{ else }}{{ .Site.BaseURL }}{{ end }}{{ .Site.Params.logos.logo }}"
+    }
+  },
+  {{ if .Params.author -}}
+  "author": {
+    "@type": "Organization",
+    "name": "{{ .Params.author }}"
+  },
+  {{- else if .Site.Author.name -}}
+  "author": {
+    "@type": "Organization",
+    "name": "{{ .Site.Author.name }}"
+  },
+  {{- end }}
+}
+</script>
+{{- end }}

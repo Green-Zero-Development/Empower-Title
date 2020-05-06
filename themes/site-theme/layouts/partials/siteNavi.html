@@ -1,4 +1,4 @@
-<nav id="navigation-wrapper" class="w-1/2 md:w-2/3 lg:w-2/3 mr-auto pl-5 text-left">
+<nav id="navigation-wrapper" class="w-1/2 lg:w-5/6 xxl:w-4/6 mr-auto pl-5 text-left">
 
 <div class="bg-color-1c2541 text-black font-open uppercase desktop-menu">
   {{ $currentNode := . }}
@@ -52,13 +52,13 @@
         {{ partial "utilities/dropdownClickScript.html" (dict "context" . "Name" $dropdownName) }}
         {{ end }}
   {{ else }}
-  <a class="{{if or ($currentNode.IsMenuCurrent "main" .) ($currentNode.HasMenuCurrent "main" .) }} active{{end}}{{ if .Pre }}scroll{{ else }}{{ end }} hover:bg-color-1B5785 hover:text-white text-xs xl:text-sm py-4 px-3 mr-2 select-none desktop-menu-item" href="{{.URL}}">{{ .Name }}</a>
+  <a class="{{if or ($currentNode.IsMenuCurrent "main" .) ($currentNode.HasMenuCurrent "main" .) }} active{{end}}{{ if .Pre }}scroll{{ else }}{{ end }} hover:bg-color-1B5785 hover:text-white text-2xs lg:text-xs xl:text-sm py-4 px-3 mr-2 select-none desktop-menu-item" href="{{.URL}}">{{ .Name }}</a>
   {{ end }}{{ end }}
 </div>
 
 <a id="mobile-menu" class="scroll text-right" href="#headerFloatingHeightFix">
   <div id="mobile-menu-button" class="mobile-menu-button">
-    <i class="text-3xl md:text-5xl pr-5 md:pr-8 fas fa-bars"></i>
+    <i class="text-3xl md:text-4xl pr-5 md:pr-8 fas fa-bars"></i>
   </div>
 </a>
 
