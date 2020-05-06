@@ -71,7 +71,7 @@ enableRobotsTXT = true
     insta = ""
     linkedin = ""
     pinterest = ""
-[params.publishingSettings]
+[params.publishing_settings]
     site_in_production = true
 
 [mediaTypes]
