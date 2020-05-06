@@ -25,7 +25,7 @@
             <div class="w-full sm:w-2/3 xl:w-1/2">
                 <h4 class="font-teko text-4xl leading-none">{{ .Params.address.city_serviced }}, {{ .Params.address.state_serviced }}</h4>
                 <p class="font-open text-base">{{ .Params.address.street }}</p>
-                <p class="font-open text-base pb-8">{{ .Params.address.city_office_location }} {{ range .Site.Data.location_state_images.state }}{{ if eq $mdstate .name }}{{ .appr }}{{ end }}{{ end }}, {{ .Params.address.zip_office }}</p>
+                <p class="font-open text-base pb-8">{{ .Params.address.city_office_location }}, {{ range .Site.Data.location_state_images.state }}{{ if eq $mdstate .name }}{{ .appr }}{{ end }}{{ end }} {{ .Params.address.zip_office }}</p>
                 <div class="flex pb-4">
                     <i class="text-2xl text-color-1B5785 z-10 fas fa-phone-square"></i>
                     <p class="pl-2 font-open text-base">{{ .Params.phone }}</p>

@@ -1,6 +1,7 @@
 +++
 phone = "346-386-0800"
 fax = "346-386-0801"
+weight = 1
 [address]
 city_serviced = "Houston"
 state_serviced = "Texas"
