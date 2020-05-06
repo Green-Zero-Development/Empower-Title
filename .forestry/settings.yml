@@ -14,7 +14,7 @@ sections:
   label: Pages
   create: all
   match: "**/*"
-  exclude: ex.md
+  exclude: "*-ex.md"
 - type: directory
   path: content/locations
   label: Locations
