@@ -5,33 +5,40 @@ fields:
 - type: datetime
   name: date
   label: date
+  hidden: true
 - type: text
   name: type
   label: type
+  hidden: true
 - type: text
   name: layout
   label: layout
+  hidden: true
 - type: text
   name: url
   label: url
+  hidden: true
 - type: text
   name: title
   label: title
+  hidden: true
 - type: text
   name: page_status
   label: page_status
+  hidden: true
 - type: text
   name: publish_image
   label: publish_image
+  hidden: true
 - type: text
   name: meta_description
-  label: meta_description
+  label: Meta Description
 - type: text
   name: topbar_title
-  label: topbar_title
+  label: Topbar Title
 - type: field_group
   name: hero
-  label: hero
+  label: Hero
   fields:
   - type: text
     name: title
@@ -39,19 +46,23 @@ fields:
   - type: textarea
     name: paragraph_text
     label: paragraph_text
+    config:
+      wysiwyg: true
+      schema:
+        format: html
   - type: file
     name: img
     label: img
 - type: field_group
   name: schedule_list_section
-  label: schedule_list_section
+  label: Schedule List Section
   fields:
   - type: text
     name: title
     label: title
   - type: field_group
     name: schedule_A
-    label: schedule_A
+    label: Schedule A
     fields:
     - type: text
       name: title
@@ -64,7 +75,7 @@ fields:
       label: list_items
   - type: field_group
     name: schedule_B
-    label: schedule_B
+    label: Schedule B
     fields:
     - type: text
       name: title
@@ -77,7 +88,7 @@ fields:
       label: list_items
   - type: field_group
     name: schedule_C
-    label: schedule_C
+    label: Schedule C
     fields:
     - type: text
       name: title
@@ -90,7 +101,7 @@ fields:
       label: list_items
   - type: field_group
     name: schedule_D
-    label: schedule_D
+    label: Schedule D
     fields:
     - type: text
       name: title
@@ -103,7 +114,7 @@ fields:
       label: list_items
 - type: field_group
   name: who_pays_what_section
-  label: who_pays_what_section
+  label: Who Pays What Section
   fields:
   - type: text
     name: title
@@ -113,7 +124,7 @@ fields:
     label: subtitle
   - type: field_group
     name: seller_list
-    label: seller_list
+    label: Seller List
     fields:
     - type: text
       name: title
@@ -126,7 +137,7 @@ fields:
       label: list_items
   - type: field_group
     name: buyer_list
-    label: buyer_list
+    label: Buyer List
     fields:
     - type: text
       name: title
