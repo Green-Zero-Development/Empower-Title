@@ -87,3 +87,5 @@ fields:
   - type: file
     name: img
     label: img
+pages:
+- content/pages/underwriting.md
