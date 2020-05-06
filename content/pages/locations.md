@@ -1,7 +1,7 @@
 +++
 date = "2019-04-24T05:00:00+00:00"
 type = "page"
-layout = "locations"
+layout = "location-page"
 url = "/locations/"
 title = "Locations"
 page_status = "locations"

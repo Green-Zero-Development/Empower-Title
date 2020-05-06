@@ -2,13 +2,7 @@
     {{ if eq .Title "Home" }}
         {{ .Site.Title }} 
     {{ else }} 
-        {{ if .Title }}
-            {{ .Title }} | {{ .Site.Title }}
-        {{ else }}
-    
-    {{ .Params.name }} | {{ .Site.Title }}
-
-        {{ end }}
+        {{ .Title }} | {{ .Site.Title }}
     {{ end }}
 </title>
 <meta name="description" content="{{ if .Params.meta_description }}{{ .Params.meta_description }}{{ else }}{{ .Site.Data.global_data.meta.description }}{{ end }}">
